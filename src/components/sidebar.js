@@ -21,6 +21,13 @@ export const Sidebar = () => {
                                     <p>Inicio</p>
                                 </Link>
                             </li>
+
+                            <li>
+                                <Link to="/dashboard/usuarios">
+                                    <i className="fas fa-users"></i>
+                                    <p>Usuarios</p>
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </nav>

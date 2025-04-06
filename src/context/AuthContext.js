@@ -83,8 +83,110 @@ export const AuthProvider = ({ children }) => {
         }
     };
     
+    // Crear usuario
+    const createUser = async (userData) =>
+    {
+        try
+        {
+            const token = localStorage.getItem("token");
+            const response = await axios.post(`${API_BASE_URL}/create-user`, userData, {
+                headers: 
+                {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            return { success: true, user: response.data.user};
+        }
+        catch(error)
+        {
+            return {success: false, error};
+        }
+    };
 
-    
+    // Listar usuarios
+    const getUsers = async () =>
+    {
+        try
+        {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(`${API_BASE_URL}/get-users`, {
+                headers:
+                {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            return { success : true, users: response.data.users};
+        }
+        catch(error)
+        {
+            return {success: false, error};
+        }
+    }
+
+    // Obtener usuario por id
+    const getUserById = async (userId) =>
+    {
+        try
+        {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(`${API_BASE_URL}/get-user/${userId}`,{
+                headers:
+                {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            return {success: true, user: response.data.user};
+        }
+        catch(error)
+        {
+            return {succes: false, error}
+        }
+    }
+
+    // Editar el rol del usuario
+    const updateUserRol = async (userId, role) =>
+    {
+        try
+        {
+            const token = localStorage.getItem("token");
+            const response = await axios.put(`${API_BASE_URL}/update-user/${userId}`,{role}, {
+                headers:
+                {
+                    "Authorization":`Bearer ${token}`
+                }
+            });
+
+            const updatedUser = response.data.user;
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+            setCurrentUser(updatedUser);
+
+            return { success:true, user: updateUser};
+        }
+        catch(error)
+        {
+            return {succes:false, error};
+        }
+    }
+
+    // Eliminar usuario
+    const deleteUser = async (userId) =>
+    {
+        try
+        {
+            const token = localStorage.getItem("token");
+            const response = await axios.delete(`${API_BASE_URL}/delete-user/${userId}`,{
+                headers:
+                {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+            return {success: true, message: response.data.message};
+        }
+        catch(error)
+        {
+            return {succes:false, error};
+        }
+    }
 
     const value = {
         currentUser,
@@ -92,6 +194,11 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         updateUser,
+        createUser,
+        getUsers,
+        getUserById,
+        updateUserRol,
+        deleteUser,
         isAuthenticated: !!currentUser
     }
 

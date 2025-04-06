@@ -120,6 +120,8 @@ body
     flex-direction: column;
     margin-left: 250px;
     height: 100vh;
+    position: relative;
+
 }
 
 .content
@@ -127,6 +129,9 @@ body
     flex: 1;
     padding: 2rem;
     background: #F5F5F5;
+    margin-top: 64px; /* Altura del navbar */
+    overflow-y: auto; /* Permite scroll en el contenido */
+    height: calc(100vh - 64px); /* Altura total menos navbar */
 }
 
 .container {
@@ -145,6 +150,10 @@ body
 /* Navbar inicio */
 .navbar
 {
+    position: fixed; /* Fija el navbar */
+    top: 0;
+    right: 0;
+    left: 250px; /* Mismo ancho que el margen-left del main-content */
     display: flex;
     justify-content: space-between; 
     align-items: center;
@@ -153,6 +162,8 @@ body
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 4px rgba(0,0,0, 0.05);
     height: 64px;
+    background-color: white; /* Añadido para que el navbar tenga fondo */
+    z-index: 50; /* Asegura que está por encima del contenido */
 }
 
 .navbar-content 
@@ -448,3 +459,38 @@ input[type=text], select
     box-sizing: border-box;
 }
 /* FIN EDITAR PERFIL */
+
+
+.profile-picture-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+.edit-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: white;
+  padding: 6px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-icon:hover {
+  background-color: #f0f0f0;
+}
+
+.hidden-input {
+  display: none;
+}
