@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import {Modal} from "../../components/Modal";
+import { Modal } from "../../components/Modal";
 
 const API_BASE_URL = "http://localhost:8000";
 
@@ -14,7 +14,6 @@ export const ProfileInfo = () => {
   const [lastname, setLastName] = useState(currentUser?.last_name || "");
   const [phone, setPhone] = useState(currentUser?.phone || "");
   const [email, setEmail] = useState(currentUser?.email || "");
-  const [rol, setRol] = useState(currentUser?.role || "");
   const [city, setCity] = useState(currentUser?.address?.city || "");
   const [street, setStreet] = useState(currentUser?.address?.street || "");
   const [state, setState] = useState(currentUser?.address?.state || "");
@@ -80,12 +79,10 @@ export const ProfileInfo = () => {
 
   return (
     <div className="container">
-      <div className="title-header">
-        <h1>Información del perfil</h1>
-      </div>
+      <header>Información del usuario</header>
 
-      <form onSubmit={handleSubmit}>
-        <div className="row">
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="col-md-12">
           <h2>Foto de perfil</h2>
           <div className="profile-picture-wrapper">
             <img
@@ -106,56 +103,60 @@ export const ProfileInfo = () => {
           </div>
 
           <h2>Datos personales</h2>
-          <div>
-            <label>Nombre:</label>
-            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          <div className="column">
+            <div className="input-box">
+              <label>Nombre:</label>
+              <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+            </div>
+
+            <div className="input-box">
+              <label>Apellidos:</label>
+              <input type="text" value={lastname} onChange={(e) => setLastName(e.target.value)} />
+            </div>
           </div>
 
-          <div>
-            <label>Apellidos:</label>
-            <input type="text" value={lastname} onChange={(e) => setLastName(e.target.value)} />
-          </div>
+          <div className="column">
+            <div className="input-box">
+              <label>Télefono:</label>
+              <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            </div>
 
-          <div>
-            <label>Télefono:</label>
-            <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
-          </div>
-
-          <div>
-            <label>Correo electrónico:</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </div>
-
-          <div>
-            <label>Rol:</label>
-            <input type="text" value={rol} disabled />
+            <div className="input-box">
+              <label>Correo electrónico:</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </div>
           </div>
 
           <h2>Datos del domicilio</h2>
-          <div>
-            <label>Estado:</label>
-            <input type="text" value={state} onChange={(e) => setState(e.target.value)} />
+          <div className="column">
+            <div className="input-box">
+              <label>Estado:</label>
+              <input type="text" value={state} onChange={(e) => setState(e.target.value)} />
+            </div>
+
+            <div className="input-box">
+              <label>Ciudad:</label>
+              <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+            </div>
           </div>
 
-          <div>
-            <label>Ciudad:</label>
-            <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
-          </div>
+          <div className="column">
+            <div className="input-box">
+              <label>Avenida o calle:</label>
+              <input type="text" value={street} onChange={(e) => setStreet(e.target.value)} />
+            </div>
 
-          <div>
-            <label>Avenida o calle:</label>
-            <input type="text" value={street} onChange={(e) => setStreet(e.target.value)} />
-          </div>
+            <div className="input-box">
+              <label>Código postal:</label>
+              <input type="text" value={zip} onChange={(e) => setZip(e.target.value)} />
+            </div>
 
-          <div>
-            <label>Código postal:</label>
-            <input type="text" value={zip} onChange={(e) => setZip(e.target.value)} />
           </div>
+          <button type="submit" disabled={loading}>
+            {loading ? "Guardando..." : "Guardar cambios"}
+          </button>
         </div>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Guardando..." : "Guardar cambios"}
-        </button>
       </form>
 
       {/* Modales */}

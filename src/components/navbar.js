@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import nouserimage from "../assets/no_user_image.png";
 
 
-export const Navbar = () => {
+export const Navbar = ({ toggleSidebar, isOpen }) => {
     const { currentUser, logout } = useAuth();
     const navigate = useNavigate();
     const [showNotifications, setShowNotifications] = useState(false);
@@ -60,9 +60,12 @@ export const Navbar = () => {
     const unreadCount = notifications.filter(notif => !notif.read).length;
 
     return (
-        <header className="navbar">
-            <i className="fas fa-bars"></i>
+        <header className={`navbar ${!isOpen ? '' : 'collapsed'}`}>
+            <button onClick={toggleSidebar} className="hamburger-btn">
+                <i className="fas fa-bars"></i>
+            </button>
             <div className="navbar-content">
+
                 <div className="notification-container" ref={notificationRef}>
                     <button
                         className="notification-icon"
@@ -109,7 +112,7 @@ export const Navbar = () => {
                         {currentUser?.profile_picture ? (
                             <img
                                 src={`http://localhost:8000${currentUser.profile_picture}`}
-                                
+
                                 alt="Foto de perfil"
                                 className="avatar-image"
                             />

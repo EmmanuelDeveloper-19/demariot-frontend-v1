@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser ] = useState(null);
     const [loading, setLoading] = useState(true);
 
+
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         const token = localStorage.getItem('token');
@@ -95,7 +96,7 @@ export const AuthProvider = ({ children }) => {
                     "Authorization": `Bearer ${token}`,
                 },
             });
-            return { success: true, user: response.data.user};
+            return { success: true, user: response.userData};
         }
         catch(error)
         {
@@ -174,7 +175,7 @@ export const AuthProvider = ({ children }) => {
         try
         {
             const token = localStorage.getItem("token");
-            const response = await axios.delete(`${API_BASE_URL}/delete-user/${userId}`,{
+            const response = await axios.delete(`${API_BASE_URL}/delete-users/${userId}`,{
                 headers:
                 {
                     "Authorization": `Bearer ${token}`,

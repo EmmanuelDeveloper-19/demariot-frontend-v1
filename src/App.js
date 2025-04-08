@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Login } from "./auth/login";
 import { ProtectedRoutes } from "./services/ProtectedRoute";
-import { Home } from "./pages/home";
+import { Home } from "./pages/home/home";
 import { Layout } from "./layout/layout";
 import { ProfileInfo } from "./pages/settings/profile-info";
 
@@ -18,22 +18,46 @@ export function App() {
         <Route index element={<Login />} />
         <Route path="/login" element={<Login />} />
 
-        <Route path="/dashboard" element={<ProtectedRoutes allowedRoles={["admin", "user"]} />}>
-          <Route element={<Layout/>}>
-          <Route path="home" element={<Home/>}/>
-          <Route path="profile-info" element={<ProfileInfo/>}/>
-          </Route>
-        </Route>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoutes allowedRoles={["admin", "user"]}>
+              <Layout />
+            </ProtectedRoutes>
+          }
+        >
+          <Route path="home" element={<Home />} />
+          <Route path="profile-info" element={<ProfileInfo />} />
 
-        <Route path="/dashboard" element={<ProtectedRoutes allowedRoles={["admin"]}/>}>
-          <Route element={<Layout/>}>
-          <Route path="usuarios" element={<UserList/>}/>
-          <Route path="agregarUsuario" element={<UserCreate/>}/>
-          <Route path="usuarioInfo/:id" element={<UserDetail/>}/></Route>
+          {/* Subrutas protegidas SOLO para admin */}
+          <Route
+            path="usuarios"
+            element={
+              <ProtectedRoutes allowedRoles={["admin"]}>
+                <UserList />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="agregarUsuario"
+            element={
+              <ProtectedRoutes allowedRoles={["admin"]}>
+                <UserCreate />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="usuarioInfo/:id"
+            element={
+              <ProtectedRoutes allowedRoles={["admin"]}>
+                <UserDetail />
+              </ProtectedRoutes>
+            }
+          />
         </Route>
-        
       </Routes>
     </BrowserRouter>
+
   )
 }
 

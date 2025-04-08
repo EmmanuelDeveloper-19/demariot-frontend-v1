@@ -1,5 +1,34 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
+:root
+{
+    --primary: #003145;
+    --secondary: #00506d;
+    --complementary: #ff8c42;
+
+    --primary-dark: #00263a;
+    --primary-medium: #00709e;
+    --primary-light: #e6f4f1;
+
+    --text-dark: #1e333b;
+    --text-medium-dark: #5b7a8c;
+    --text-light: #b2cbda;
+
+    --success: #2d936c;
+    --alert: #ffb347;
+    --danger: #e75a5a;
+    --info: #3c8ac1;
+
+    --success-hover: #247a59;
+    --alert-hover: #e69e2c;
+    --danger-hover: #c94c4c;
+    --info-hover: #3171a1 ;
+
+    --background-light: #f5f8fa;
+
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 * 
 {
     margin: 0;
@@ -11,15 +40,53 @@
 body
 {
     font-family: 'Montserrat', sans-serif;
+    background: #F5F5F5;
+
 }
 
-/* Contenido principal de la dashboard*/
-.dashboard
+/* Estilos reutilizables inicio*/
+.btn
 {
-    display: flex;
-    width: 100%;
-    height: 100vh;
+    margin: 10px;
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
 }
+.btn-success
+{
+    background-color: var(--success);
+
+}
+
+.btn-success:hover
+{
+    background: var(--success-hover);
+}
+
+.btn-info
+{
+    background: var(--info);
+}
+
+.btn-info:hover
+{
+    background: var(--info-hover);
+}
+.btn-danger
+{
+    background: var(--danger);
+}
+
+.btn-danger:hover
+{
+    background: var(--danger-hover);
+}
+/* Estilos reutilizables final*/
+
+
+/* Contenido principal de la dashboard*/
 
 /* Siebar inicio*/
 .sidebar
@@ -27,13 +94,38 @@ body
     position: fixed;
     width: 260px;
     height: 100vh;
-    background: linear-gradient(to bottom, #001e2b, #003145);
-    color: white;
+    background: var(--primary);
     display: flex;
     flex-direction: column;
     z-index: 100;
+
+}
+
+.sidebar.collapsed
+{
+    width: 64px;
     overflow-x: hidden;
-    overflow-y: auto;
+
+}
+
+.sidebar.collapsed .logo img {
+    padding: 0;
+    width: 60px; 
+    margin: 0;
+    max-width: 100%;
+}
+
+.sidebar.collapsed .nav-list li p {
+    display: none;
+}
+
+.sidebar.collapsed .nav-list li a {
+    justify-content: center;
+    padding: 12px 8px;
+}
+
+.sidebar.collapsed .nav-list li i {
+    font-size: 18px;
 }
 
 .sidebar .logo
@@ -47,7 +139,7 @@ body
 
 .sidebar .logo img
 {
-    max-width: 60%;
+    max-width: 50%;
     height: auto;
 }
 
@@ -83,7 +175,7 @@ body
     align-items: center;
     padding: 12px 16px;
     text-decoration: none;
-    color: white;
+    color: var(--primary-light);
     border-radius: 8px;
     width: 100%;
     text-align: left;
@@ -94,7 +186,7 @@ body
 
 .nav-list li a:hover
 {
-    background: rgba(255,255,255,0.1);
+    background: var(--text-medium-dark);
 }
 
 .nav-list li i
@@ -121,39 +213,106 @@ body
     margin-left: 250px;
     height: 100vh;
     position: relative;
+}
 
+.main-content.collapsed
+{
+    margin-left: 64px !important;
 }
 
 .content
 {
     flex: 1;
     padding: 2rem;
-    background: #F5F5F5;
-    margin-top: 64px; /* Altura del navbar */
-    overflow-y: auto; /* Permite scroll en el contenido */
-    height: calc(100vh - 64px); /* Altura total menos navbar */
+    overflow-y: auto; 
+    height: calc(100vh - 64px); 
 }
 
 .container {
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     padding: 20px;
     margin: 20px; 
     max-width: 100%; 
-    height: 100%;
     margin-left: auto;
     margin-right: auto; 
+}
+
+.container header
+{
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    font-weight: 500;
+    text-align: center;
+}
+
+.container .form
+{
+    margin-top: 30px;
+}
+
+.form .input-box
+{
+    width: 100%;
+    margin-top: 20px;
+}
+
+.input-box label
+{
+    color: #333;
+}
+
+.form :where(.input-box input )
+{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 8px;
+    padding: 0 15px;
+    font-size: 1rem;
+    color: #707070
+}
+
+select
+{
+    height: 50px;
+    width: 100%;
+    position: relative;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    color: #374151;
+    background-color: #fff;
+    outline: none;
+    font-size: 1rem;
+    margin-top: 8px;
+    padding: 0 5px;
+}
+
+.form .column
+{
+    display: flex;
+    column-gap: 15px ;
+}
+
+.row
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 /* Contenido principal final */
 
 /* Navbar inicio */
 .navbar
 {
-    position: fixed; /* Fija el navbar */
     top: 0;
     right: 0;
-    left: 250px; /* Mismo ancho que el margen-left del main-content */
+    left: 250px;
     display: flex;
     justify-content: space-between; 
     align-items: center;
@@ -162,15 +321,28 @@ body
     border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 4px rgba(0,0,0, 0.05);
     height: 64px;
-    background-color: white; /* Añadido para que el navbar tenga fondo */
+    background-color: white;
     z-index: 50; /* Asegura que está por encima del contenido */
+}
+
+.navbar.collapsed 
+{
+    left: 0 ;
+}
+
+.navbar .hamburger-btn
+{
+    margin: 0;
+    background: none;
+    color: var(--primary-dark);
+    font-size: 24px;
 }
 
 .navbar-content 
 {
     display: flex;
     align-items: center;
-    gap: 1rem; 
+    gap: 0.75rem;
 }
 
 .notification-container
@@ -187,6 +359,7 @@ body
     cursor: pointer;
     padding: 0.5rem;
     position: relative;
+    margin: 0;
 }
 
 .notification-icon:hover
@@ -292,7 +465,16 @@ body
   
 .notifications-list li:last-child 
 {
-    border-bottom: none;
+    border-bottom: none;input[type=text], select 
+    {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 }
 
 .notification-content
@@ -303,20 +485,7 @@ body
 .notification-content p 
 {
     margin: 0 0 4px 0;
-    font-size: 14px;
-    color: #333;
-}
-  
-.notification-time 
-{
-    font-size: 12px;
-    color: #777;
-}
-  
-.unread-indicator 
-{
-    width: 8px;
-    height: 8px;
+    
     background-color: #3498db;
     border-radius: 50%;
     margin-left: 8px;
@@ -373,6 +542,7 @@ body
     cursor: pointer;
     padding: 0.5rem;
     transition: background-color 0.2s;
+    margin:0;
 }
 
 .settings-dropdown
@@ -442,22 +612,7 @@ body
 /* Fin de estilos del contenido del layout dashboard*/
 
 /* INICIO EDITAR-PERFIL*/
-.title-header
-{
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e0e0e0;
-}
 
-input[type=text], select 
-{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
 /* FIN EDITAR PERFIL */
 
 
@@ -493,4 +648,40 @@ input[type=text], select
 
 .hidden-input {
   display: none;
+}
+
+/* TABLE INICIO */
+.content-table
+{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    width: 100%;
+    box-shadow: var(--shadow);
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+.content-table thead tr
+{
+    background: var(--info);
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table th,
+.content-table td
+{
+    padding: 12px 15px;
+}
+
+.content-table tbody tr
+{
+    border-bottom: 1px solid #dddd;
+}
+
+.content-table tbody tr:nth-of-type(even)
+{
+    background: var(--background-light);
 }

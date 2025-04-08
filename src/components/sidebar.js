@@ -1,14 +1,14 @@
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-export const Sidebar = () => {
-
+export const Sidebar = ({ isOpen }) => {
+    const { currentUser } = useAuth();
 
     return (
-        <aside className="sidebar">
-
+        <aside className={`sidebar ${!isOpen ? 'collapsed' : ''}`}>
             <div className="logo">
-                <img src={logo} alt="logo"></img>
+                <img src={logo} alt="logo" />
             </div>
 
             <div className="sidebar-content">
@@ -22,18 +22,18 @@ export const Sidebar = () => {
                                 </Link>
                             </li>
 
-                            <li>
-                                <Link to="/dashboard/usuarios">
-                                    <i className="fas fa-users"></i>
-                                    <p>Usuarios</p>
-                                </Link>
-                            </li>
+                            {currentUser?.role === "admin" && (
+                                <li>
+                                    <Link to="/dashboard/usuarios">
+                                        <i className="fas fa-users"></i>
+                                        <p>Usuarios</p>
+                                    </Link>
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </nav>
             </div>
-
         </aside>
-    )
-
-}
+    );
+};
