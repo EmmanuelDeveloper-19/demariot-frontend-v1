@@ -19,6 +19,8 @@ export const UserCreate = () => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [showErrorModal, setShowErrorModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -27,10 +29,10 @@ export const UserCreate = () => {
         setShowConfirmModal(true);
     };
 
-    const handleConfirmAdd = async(event) =>
-    {
+    const handleConfirmAdd = async (event) => {
         event.preventDefault();
         setShowConfirmModal(false);
+    
         const user = {
             first_name: firstNameRef.current.value,
             last_name: lastNameRef.current.value,
@@ -39,24 +41,34 @@ export const UserCreate = () => {
             phone: phoneRef.current.value,
             role: roleRef.current.value,
             address: {
-              street: streetRef.current.value,
-              city: cityRef.current.value,
-              state: stateRef.current.value,
-              zip: zipRef.current.value,
+                street: streetRef.current.value,
+                city: cityRef.current.value,
+                state: stateRef.current.value,
+                zip: zipRef.current.value,
             },
-          };
-        try{
-            
-            await createUser(user);
-            setShowSuccessModal(true);
-            navigate("/dashboard/usuarios");
-
-
-        }catch (error){
-            console.log("Error", error)
+        };
+    
+        try {
+            const result = await createUser(user); // <--- capturar resultado aquí
+    
+            if (result.success) {
+                setShowSuccessModal(true);
+                navigate("/dashboard/usuarios");
+            } else {
+                // Verificar si el error fue de correo o teléfono
+                const errorMessage = result.error?.response?.data?.message || "Error desconocido";
+    
+                console.log("Error en creación", errorMessage);
+                setErrorMessage(errorMessage); // 👈 guardar error específico
+                setShowErrorModal(true);
+            }
+        } catch (error) {
+            console.log("Error inesperado", error);
+            setErrorMessage("Error inesperado al crear el usuario.");
             setShowErrorModal(true);
         }
     }
+    
 
     return (
         <div className="container">
@@ -201,7 +213,7 @@ export const UserCreate = () => {
                 <Modal
                     isOpen={showErrorModal}
                     title="Error"
-                    message="Ocurrió un problema al actualizar la información."
+                    message={errorMessage}
                     onConfirm={() => setShowErrorModal(false)}
                     onlyConfirm
                 />

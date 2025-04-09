@@ -104,6 +104,30 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // Crear múltiples usuarios
+    const createMultipleUsers = async (userData) => 
+    {
+        try
+        {
+            const token = localStorage.getItem("token");
+            const response = await axios.post(`${API_BASE_URL}/create-users`,userData,
+                {
+                    headers:
+                    {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                }
+            );
+            return {success: true, users: response.data.users};
+        }
+        catch (error)
+        {
+            console.error("Error al crear múltiples usuarios", error);
+            return {success: false, error};
+        }
+    }
+
     // Listar usuarios
     const getUsers = async () =>
     {
@@ -196,6 +220,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         updateUser,
         createUser,
+        createMultipleUsers,
         getUsers,
         getUserById,
         updateUserRol,

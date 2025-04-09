@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
+import nouserimage from "../../assets/no_user_image.png";
 
 const API_BASE_URL = "http://localhost:8000";
 
@@ -29,9 +30,11 @@ export const UserDetail = () => {
             <header>Información del usuario</header>
             <div className="profile-picture-wrapper">
                 <img
-                    src={`${API_BASE_URL}${user.profile_picture}`}
+                    src={user.profile_picture ? `${API_BASE_URL}${user.profile_picture}` : nouserimage}
                     alt="Imagen de perfil"
-                    className="profile-picture" />
+                    className="profile-picture"
+                />
+
             </div>
 
             <form className="form">
@@ -43,7 +46,7 @@ export const UserDetail = () => {
                     </div>
                     <div className="input-box">
                         <label>Apellidos</label>
-                        <input type="text" disabled value={user?.last_name || null}  />
+                        <input type="text" disabled value={user?.last_name || null} />
                     </div>
                 </div>
 
@@ -93,17 +96,17 @@ export const UserDetail = () => {
                 <h3>Actividad del usuario</h3>
                 <div className="input-box">
                     <label>Fecha de creación del usuario</label>
-                    <input type="text"disabled value={user?.created_at || null}/>
+                    <input type="text" disabled value={user?.created_at || null} />
                 </div>
 
                 <div className="input-box">
                     <label>Fecha de útlimo inicio de sesión</label>
-                    <input type="text"disabled value={user?.last_login || null}/>
+                    <input type="text" disabled value={user?.last_login || null} />
                 </div>
 
                 <div className="input-box">
                     <label>Fecha de última actualización de datos del usuario</label>
-                    <input type="text"disabled value={user?.updated_at || null}/>
+                    <input type="text" disabled value={user?.updated_at || null} />
                 </div>
             </form>
 

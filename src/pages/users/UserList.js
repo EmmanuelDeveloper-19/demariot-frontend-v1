@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { Modal } from '../../components/Modal';
+import * as XLSX from "xlsx";
+
 
 export const UserList = () => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -13,8 +15,7 @@ export const UserList = () => {
     const { deleteUser } = useAuth();
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-    const { getUsers, currentUser} = useAuth();
+    const { getUsers, currentUser, createMultipleUsers } = useAuth();
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -74,19 +75,134 @@ export const UserList = () => {
         }
     };
 
+    const handleExport = () => {
+        const exportData = users.map(user => ({
+            Nombre: user.first_name,
+            Apellidos: user.last_name,
+            Telefono: user.phone,
+            Correo: user.email,
+            Rol: user.role,
+            Contraseña: user.password,
+            Estado: user.address.state,
+            Ciudad: user.address.city,
+            Calle: user.address.street,
+            CP: user.address.zip,
+            Foto: user.profile_picture
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(exportData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Usuarios");
+
+        XLSX.writeFile(workbook, "usuarios.xlsx");
+    };
+
+    const handleImport = async(event) => 
+    {
+        const file = event.target.files[0];
+
+        if (!file)
+        {
+            console.error('No se selecciono ningún archivo');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = async (e) =>
+        {
+            const data = new  Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, {type: 'array'});
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            const transformedData = jsonData.map(user => ({
+                first_name: user.Nombre,
+                last_name: user.Apellidos,
+                phone: user.Telefono,
+                email: user.Correo,
+                role: user.Rol,
+                password: user.Contraseña,
+                address: {
+                  state: user.Estado,
+                  city: user.Ciudad,
+                  street: user.Calle,
+                  zip: user.CP
+                },
+                profile_picture: user.Foto
+              }));
+              
+            
+            try
+            {
+                const response = await createMultipleUsers({ users: transformedData});
+                
+                if(response.success)
+                {
+                    const { users } = await getUsers();
+                    setUsers(users);
+                    setShowSuccessModal(true);
+                }
+                else
+                {
+                    throw new Error('Error la importar usuarios');
+                }
+            } 
+            catch(error)
+            {
+                console.error(error);
+                setShowErrorModal(true);
+            }
+        };
+        reader.readAsArrayBuffer(file);
+    };
+
+    const handleDownloadTemplate = () => {
+        const templateData = [
+          {
+            Nombre: "",
+            Apellidos: "",
+            Telefono: "",
+            Correo: "",
+            Rol: "",
+            Contraseña: "",
+            Estado: "",
+            Ciudad: "",
+            Calle: "",
+            CP: "",
+            Foto: ""
+          }
+        ];
+      
+        const worksheet = XLSX.utils.json_to_sheet(templateData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "PlantillaUsuarios");
+      
+        XLSX.writeFile(workbook, "plantilla_usuarios.xlsx");
+      };
+      
 
     return (
         <div className='container'>
             <div className='row'>
                 <h2>Usuarios</h2>
                 <div style={{ display: 'flex', gap: '10px' }}>
+                    <button className='btn btn-success' onClick={handleDownloadTemplate}>
+                        Descargar plantilla 
+                    </button>
+                    <label className='btn btn-success'>
+                        <i className='fas fa-file-excel'/> Importar excel
+                        <input
+                        type="file"
+                        accept='.xlsx, .xls'
+                        style={{display: 'none'}}
+                        onChange={handleImport}/>
+                    </label>
+
+                    <button onClick={handleExport} className='btn btn-success'>
+                        <i className='fas fa-file-excel' />Descargar Excel
+                    </button>
                     <Link to="/dashboard/agregarUsuario" className='btn btn-info'>
                         Añadir nuevo usuario
                     </Link>
-                    <button className='btn btn-success'>
-                        <i className='fas fa-plus'></i>
-                        Importar
-                    </button>
                 </div>
             </div>
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Modal } from "../../components/Modal";
+import nouserimage from "../../assets/no_user_image.png";
 
 const API_BASE_URL = "http://localhost:8000";
 
@@ -86,7 +87,7 @@ export const ProfileInfo = () => {
           <h2>Foto de perfil</h2>
           <div className="profile-picture-wrapper">
             <img
-              src={preview}
+              src={preview ? preview : nouserimage}
               alt="Vista previa"
               className="profile-picture"
             />
