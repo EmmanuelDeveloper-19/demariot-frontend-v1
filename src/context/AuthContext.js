@@ -83,6 +83,31 @@ export const AuthProvider = ({ children }) => {
             return { success: false, error };
         }
     };
+
+    const changePassword = async (userId, currentPassword, newPassword) => {
+        try {
+          const token = localStorage.getItem("token");
+          const response = await axios.put(
+            `${API_BASE_URL}/changePassword/${userId}/password`,
+            {
+              currentPassword,
+              newPassword,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+      
+          return { success: true, message: response.data.message };
+        } catch (error) {
+          console.error("Error al cambiar la contraseña:", error.response?.data || error);
+          return { success: false, error: error.response?.data?.message || "Error desconocido" };
+        }
+      };
+      
     
     // Crear usuario
     const createUser = async (userData) =>
@@ -219,6 +244,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         updateUser,
+        changePassword,
         createUser,
         createMultipleUsers,
         getUsers,

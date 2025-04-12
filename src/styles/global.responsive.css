@@ -1,9 +1,119 @@
 /* Estilos responsivos */
+.tonotos {
+    width: 200px;
+}
 
-@media screen and (max-width: 500px)
-{
-    .form .column
-    {
+.hamburger-btn2 {
+    display: none;
+    margin: 0;
+    background: none;
+    font-size: 24px;
+}
+
+.hamburger-btn2:hover {
+    background: none;
+    color: black;
+}
+
+@media screen and (max-width: 500px) {
+    .form .column {
         flex-wrap: wrap;
+    }
+
+    .sidebar {
+        width: 0;
+    }
+
+    .sidebar.collapsed {
+        width: 260px;
+        z-index: 3;
+    }
+
+    .sidebar.collapsed h1
+    {
+        display: flex;
+    }
+
+    .sidebar.collapsed .logo
+    {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 15px;
+    }
+
+    .sidebar .logo
+    {
+        display: none;
+    }
+
+    .sidebar.collapsed .nav-list li p
+    {
+        display: flex;
+    }
+
+    .sidebar.collapsed .nav-list li a
+    {
+        justify-content: start;
+        padding: 12px 18px;
+    }
+
+
+    .main-content {
+        margin-left: 0px;
+    }
+
+    .main-content.collapsed {
+        margin-left: 0 !important;
+    }
+
+    .hamburger-btn2 {
+        margin: 0;
+        background: none;
+        font-size: 24px;
+        display: flex;
+    }
+
+    .hamburger-btn2:hover {
+        background: none;
+        color: black;
+    }
+
+    .btn {
+        min-width: 100%;
+        flex: none;
+    }
+
+    .actions-container {
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        gap: 0;
+        font-size: 14px;
+    }
+
+    .table-container
+    {
+        overflow-x: auto;
+    }
+
+    .row
+    {
+        display: flex;
+
+        flex-direction: column;
+    }
+
+    .content-table .table-options
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container
+    {
+        background: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
     }
 }

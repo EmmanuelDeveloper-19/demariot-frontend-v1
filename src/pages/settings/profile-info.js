@@ -6,7 +6,7 @@ import nouserimage from "../../assets/no_user_image.png";
 const API_BASE_URL = "http://localhost:8000";
 
 export const ProfileInfo = () => {
-  const { currentUser, updateUser } = useAuth();
+  const { currentUser, updateUser, changePassword } = useAuth();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -26,6 +26,11 @@ export const ProfileInfo = () => {
       : null
   );
   const [loading, setLoading] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -69,14 +74,34 @@ export const ProfileInfo = () => {
 
       if (Object.keys(updatedData).length > 0) {
         await updateUser(currentUser?._id, updatedData);
-        setShowSuccessModal(true);
       }
+
+      if(currentPassword || newPassword || confirmPassword)
+      {
+        if(newPassword !== confirmPassword)
+        {
+          throw new Error("Las contraseñas no coinciden")
+        }
+
+        const result = await changePassword(currentUser._id, currentPassword, newPassword);
+        if (!result.success)
+        {
+          throw new Error(result.error || "Contraseña actual incorrecta");
+        }
+      }
+      setShowSuccessModal(true);
     } catch (error) {
-      setShowErrorModal(true);
+      if (error.message.includes("contraseña")) {
+        setPasswordError(error.message);
+      } else {
+        setShowErrorModal(true);
+      }
     } finally {
       setLoading(false);
     }
   };
+
+  const passwordMatch = newPassword && confirmPassword && newPassword === confirmPassword;
 
   return (
     <div className="container">
@@ -153,6 +178,55 @@ export const ProfileInfo = () => {
             </div>
 
           </div>
+
+          <h2>Cambiar contraseña</h2>
+          <div className="password-box">
+          <label>Contraseña actual</label>
+          <div className="input-icon-container">
+            <input
+              className="password-input"
+              type={showPassword ? "text" : "password"}
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+            />
+            <i
+              className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"} toggle-password`}
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </div>
+        </div>
+
+        <div className="password-box">
+          <label>Contraseña nueva</label>
+          <div className="input-icon-container">
+            <input
+              className="password-input"
+              type={showPassword ? "text" : "password"}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="password-box">
+          <label>Confirmar contraseña</label>
+          <div className="input-icon-container">
+            <input
+              className={`password-input ${confirmPassword && (passwordMatch ? "match" : "mismatch")}`}
+              type={showPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+          {confirmPassword && (
+            <p style={{ color: passwordMatch ? "green" : "red" }}>
+              {passwordMatch ? "Las contraseñas coinciden" : "Las contraseñas no coinciden"}
+            </p>
+          )}
+        </div>
+
+        {passwordError && <p className="error-message">{passwordError}</p>}
+
           <button type="submit" disabled={loading}>
             {loading ? "Guardando..." : "Guardar cambios"}
           </button>

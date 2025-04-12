@@ -11,7 +11,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     padding: 2rem;
 }
 
@@ -81,6 +81,12 @@ button:hover {
 }
 
 .input-icon-container input {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
     width: 100%;
     box-sizing: border-box;
     padding: 0.75rem 2.5rem 0.75rem 2.5rem;
@@ -98,4 +104,59 @@ button:hover {
     background: none;
     border: none;
     padding: 0;
+}
+
+.forgot-password {
+    display: flex;
+    margin: 10px 10px 0;
+
+}
+
+.forgot-password .link {
+    font-weight: bold;
+    color: #357ae8;
+    text-decoration: none;
+}
+
+.forgot-password p {
+    margin-right: 10px;
+}
+
+.mensaje-card {
+    background-color: #fff;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mensaje-card h1 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 16px;
+}
+
+.mensaje-card p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.mensaje-card button
+{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: #2c3e50;
+    border: #2c3e50 solid 3px;
+}
+
+.mensaje-card button:hover
+{
+    background: #2c3e50;
+    color: white;
 }

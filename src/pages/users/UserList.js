@@ -184,12 +184,13 @@ export const UserList = () => {
         <div className='container'>
             <div className='row'>
                 <h2>Usuarios</h2>
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <div className='actions-container'>
                     <button className='btn btn-success' onClick={handleDownloadTemplate}>
+                        <i className='fas fa-download'/>
                         Descargar plantilla 
                     </button>
                     <label className='btn btn-success'>
-                        <i className='fas fa-file-excel'/> Importar excel
+                        <i className='fas fa-upload'/> Importar excel
                         <input
                         type="file"
                         accept='.xlsx, .xls'
@@ -198,15 +199,17 @@ export const UserList = () => {
                     </label>
 
                     <button onClick={handleExport} className='btn btn-success'>
-                        <i className='fas fa-file-excel' />Descargar Excel
+                        <i className='fas fa-file-excel' />
+                        Descargar Excel
                     </button>
                     <Link to="/dashboard/agregarUsuario" className='btn btn-info'>
+                        <i className='fas fa-plus'></i>
                         Añadir nuevo usuario
                     </Link>
                 </div>
             </div>
 
-            <div>
+            <div className='table-container'>
                 <table className='content-table'>
                     <thead>
                         <tr>
@@ -226,14 +229,14 @@ export const UserList = () => {
                                 <td>{user.first_name} {user.last_name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.role}</td>
-                                <td>
-                                    <Link to={`/dashboard/usuarioInfo/${user._id}`} className='btn btn-success'>
+                                <td className='table-options'>
+                                    <Link to={`/dashboard/usuarioInfo/${user._id}`} className='btn btn-success' title='Ver usuario'>
                                         <i className='fas fa-eye' />
                                     </Link>
-                                    <button onClick={() => handleEdit(user)} className='btn btn-info'>
+                                    <button onClick={() => handleEdit(user)} className='btn btn-info' title='Editar el rol del usuario'>
                                         <i className='fas fa-pencil' />
                                     </button>
-                                    <button onClick={() => handleDelete(user)} className='btn btn-danger'>
+                                    <button onClick={() => handleDelete(user)} className='btn btn-danger' title='Eliminar usuario'>
                                         <i className='fas fa-trash' />
                                     </button>
                                 </td>

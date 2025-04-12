@@ -13,6 +13,5 @@ export const ProtectedRoutes = ({ allowedRoles, children }) => {
     return <Navigate to="/dashboard/home" replace />;
   }
 
-  // Si viene children, lo renderizamos (para subrutas)
   return children ? children : <Outlet />;
 };

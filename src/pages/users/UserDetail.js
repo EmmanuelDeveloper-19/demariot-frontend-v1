@@ -28,14 +28,14 @@ export const UserDetail = () => {
     return (
         <div className='container'>
             <header>Información del usuario</header>
-            <div className="profile-picture-wrapper">
-                <img
-                    src={user.profile_picture ? `${API_BASE_URL}${user.profile_picture}` : nouserimage}
-                    alt="Imagen de perfil"
-                    className="profile-picture"
-                />
+                <div className="profile-picture-wrapper">
+                    <img
+                        src={user.profile_picture ? `${API_BASE_URL}${user.profile_picture}` : nouserimage}
+                        alt="Imagen de perfil"
+                        className="profile-picture"
+                    />
 
-            </div>
+                </div>
 
             <form className="form">
                 <h3>Datos de perfil</h3>

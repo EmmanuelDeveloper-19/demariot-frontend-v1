@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/login.css";
 
 export const Login = () => {
@@ -58,6 +58,10 @@ export const Login = () => {
                         </div>
                         {error && <p className="error-message">{error}</p>}
                         <button type="submit">Ingresar</button>
+                        <div className="forgot-password">
+                            <p>¿Olvidaste tu contraseña?</p>
+                            <Link className="link" to="/reset-password">Recuperar contraseña</Link>
+                        </div>
                     </form>
                 </div>
             </div>
