@@ -124,6 +124,62 @@ body {
     background: var(--danger-hover);
 }
 
+/* Sistema de columnas */
+[class^="col-md-"] {
+    box-sizing: border-box;
+    padding: 0 15px;
+}
+
+.col-md-2 { width: 16.67%; }
+.col-md-3 { width: 25%; }
+.col-md-4 { width: 33.33%; }
+.col-md-6 { width: 50%; }
+.col-md-9 { width: 75%; }
+.col-md-10 { width: 83.33%; }
+.col-md-12 { width: 100%; }
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    background: var(--bg-sidebar);
+    color: #f1f1f1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2.5rem;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card.card-flex {
+    flex-direction: row;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contenido-izquierdo,
+.contenido-derecho {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    flex: 1;
+}
+
+.contenido-derecho {
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
 /* Estilos reutilizables final*/
 
 
@@ -141,8 +197,16 @@ body {
 
 }
 
-h2, h3{
-    color: var(--text-color)
+h1,
+h2,
+h3,
+p {
+    color: var(--text-color);
+}
+
+.texto
+{
+    font-size: 24px;
 }
 
 .sidebar.collapsed {
@@ -179,8 +243,7 @@ h2, h3{
     padding: 1rem 0;
 }
 
-.sidebar.collapsed h1
-{
+.sidebar.collapsed h1 {
     display: none;
 }
 
@@ -234,12 +297,12 @@ h2, h3{
     min-width: 24px;
     display: flex;
     justify-content: center;
-    color:var(--text-color);
+    color: var(--text-color);
 }
 
 .nav-list li p {
     margin-left: 12px;
-    color:var(--text-color);
+    color: var(--text-color);
     white-space: nowrap;
 }
 
@@ -299,14 +362,12 @@ h2, h3{
     font-weight: 500;
 }
 
-.password-box
-{
-    margin-top:20px ;
+.password-box {
+    margin-top: 20px;
     width: 50%;
 }
 
-.password-box .password-input
-{
+.password-box .password-input {
     position: relative;
     height: 50px;
     width: 100%;
@@ -357,23 +418,18 @@ select {
 
 .password-input.match {
     border: 2px solid green;
-  }
-  
-  .password-input.mismatch {
+}
+
+.password-input.mismatch {
     border: 2px solid red;
-  }
-  
-  .toggle-password {
+}
+
+.toggle-password {
     cursor: pointer;
     margin-left: 10px;
     color: #555;
-  }
-  
-.row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
+
 
 /* Contenido principal final */
 
@@ -602,8 +658,7 @@ select {
     margin: 0;
 }
 
-.settings-toggle:hover
-{
+.settings-toggle:hover {
     background: none;
 }
 
@@ -748,7 +803,6 @@ select {
 .content-table tbody tr {
     border-bottom: 1px solid #dddd;
     color: var(--text-color)
-
 }
 
 .content-table tbody tr:nth-of-type(even) {
@@ -765,11 +819,12 @@ select {
 
 /* PAGINA INICIO END*/
 
-
-.icon-picture
-{
-    width: 100px;
-    height: 100px;
-    background-size: cover;
-    border-radius: 50%;
+/* INICIO COMPONENTES DE IOT */
+.mapa {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 10px;
 }
+
+/* FINAL COMPONENTES DE IOT */

@@ -183,8 +183,9 @@ export const UserList = () => {
     return (
         <div className='container'>
             <div className='row'>
-                <h2>Usuarios</h2>
                 <div className='actions-container'>
+                <h2>Usuarios</h2>
+
                     <button className='btn btn-success' onClick={handleDownloadTemplate}>
                         <i className='fas fa-download'/>
                         Descargar plantilla 
