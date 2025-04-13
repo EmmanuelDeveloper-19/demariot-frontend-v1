@@ -9,14 +9,22 @@ export const Layout = () => {
 
     const [sidebarOpen, setSidebarOpen] = useState(true);
 
-    return(
+    return (
         <div className="app-layout">
-            <Sidebar toggleSidebar={()=> setSidebarOpen(!sidebarOpen)} isOpen={sidebarOpen}/>
-            <div className={`main-content ${sidebarOpen ? '': 'collapsed'}`}>
-                <Navbar toggleSidebar={() => setSidebarOpen(!sidebarOpen)}/>
-                <main className="content">
-                    <Outlet/>
+            <Sidebar toggleSidebar={() => setSidebarOpen(!sidebarOpen)} isOpen={sidebarOpen} />
+            <div className={`main-content ${sidebarOpen ? '' : 'collapsed'}`}>
+                <Navbar toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+                <main
+                    className="content"
+                    onClick={() => {
+                        if (window.innerWidth <= 768) {
+                            setSidebarOpen(true);
+                        }
+                    }}
+                >
+                    <Outlet />
                 </main>
+
             </div>
         </div>
     );

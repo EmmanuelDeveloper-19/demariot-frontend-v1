@@ -116,4 +116,14 @@
         margin: 0;
         padding: 0;
     }
+
+    .user-name
+    {
+        display: none;
+    }
+
+    .notification-dropdown
+    {
+        right: -90px;
+    }
 }

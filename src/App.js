@@ -17,6 +17,7 @@ import { Historial } from "./pages/history/historial";
 import { Prototype } from "./pages/proto/prototipo";
 import { HistorialAlertas } from "./pages/alertHistory/alertHistory";
 import { Logs } from "./pages/logs/logs";
+import { Chat, Mensajes } from "./pages/mensajeria/mensajeria";
 
 export function App() {
   return (
@@ -25,7 +26,6 @@ export function App() {
         <Route index element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword/>}/>
-        <Route path="/mensaje" element={<Mensaje/>}/>
 
         <Route
           path="/dashboard"
@@ -42,6 +42,9 @@ export function App() {
           <Route path="historial" element={<Historial/>}/>
           <Route path="prototipo" element={<Prototype/>}/>
           <Route path="alertHistorial" element={<HistorialAlertas/>}/>
+          <Route path="mensajes" element={<Mensajes/>}/>
+          <Route path="chat/:id" element={<Chat/>}/>
+
 
           {/* Subrutas protegidas SOLO para admin */}
           <Route
