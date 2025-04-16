@@ -1,0 +1,111 @@
+/* === BASE === */
+.btn {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 99em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-icon {
+    background: none;
+    border: none;
+    padding: 4px 6px;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--text-color)
+  }
+  
+  .btn-disabled {
+    cursor: text;
+  }
+  
+  
+  /* === FILLED BUTTONS === */
+  .btn-primary {
+    background: var(--primary);
+  }
+  
+  .btn-primary:hover {
+    background: var(--primary-hover);
+  }
+  
+  .btn-secondary {
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--secondary);
+  }
+  
+  .btn-secondary:hover {
+    background: var(--secondary);
+    color: white;
+  }
+  
+  .btn-success {
+    background: var(--success);
+  }
+  
+  .btn-success:hover {
+    background: var(--success-hover);
+  }
+  
+  .btn-info {
+    background: var(--info);
+  }
+  
+  .btn-info:hover {
+    background: var(--info-hover);
+  }
+  
+  .btn-danger {
+    background: var(--danger);
+  }
+  
+  .btn-danger:hover {
+    background: var(--danger-hover);
+  }
+  
+  .btn-cancel{
+    background: #f0f0f0;
+    color:#333;
+  }
+  
+  /* === OUTLINE BUTTONS === */
+  .btn-outline-primary {
+    background: none;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    cursor: pointer;
+  }
+  
+  .btn-outline-primary:hover {
+    background: var(--primary-hover);
+    color: white;
+  }
+  
+  .btn-outline-secondary {
+    background: transparent;
+    border: 1px solid #ccc;
+    color: var(--text-color);
+  }
+  
+  .btn-outline-primary-light {
+    background: var(--primary-light);
+    border: 1px solid var(--primary-medium);
+    color: var(--text-primary-dark);
+  }
+  
+  .btn-outline-yellow-light {
+    background: var(--alert-light);
+    border: 1px solid var(--alert-border);
+    color: var(--alert-text);
+  }
+  

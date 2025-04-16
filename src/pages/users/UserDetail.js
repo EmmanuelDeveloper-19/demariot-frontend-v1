@@ -38,7 +38,7 @@ export const UserDetail = () => {
                 </div>
 
             <form className="form">
-                <h3>Datos de perfil</h3>
+                <h3 className="titulo">Datos de perfil</h3>
                 <div className="column">
                     <div className="input-box">
                         <label>Nombre del usuario</label>
@@ -71,7 +71,7 @@ export const UserDetail = () => {
                     </div>
                 </div>
 
-                <h3>Datos de domicilio</h3>
+                <h3 className="titulo">Datos de domicilio</h3>
                 <div className="column">
                     <div className="input-box">
                         <label>Estado</label>
@@ -93,7 +93,7 @@ export const UserDetail = () => {
                     </div>
                 </div>
 
-                <h3>Actividad del usuario</h3>
+                <h3 className="titulo">Actividad del usuario</h3>
                 <div className="input-box">
                     <label>Fecha de creación del usuario</label>
                     <input type="text" disabled value={user?.created_at || null} />

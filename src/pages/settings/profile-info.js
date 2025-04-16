@@ -109,7 +109,7 @@ export const ProfileInfo = () => {
 
       <form className="form" onSubmit={handleSubmit}>
         <div className="col-md-12">
-          <h2>Foto de perfil</h2>
+          <h2 className="titulo">Foto de perfil</h2>
           <div className="profile-picture-wrapper">
             <img
               src={preview ? preview : nouserimage}
@@ -128,7 +128,7 @@ export const ProfileInfo = () => {
             />
           </div>
 
-          <h2>Datos personales</h2>
+          <h2 className="titulo">Datos personales</h2>
           <div className="column">
             <div className="input-box">
               <label>Nombre:</label>
@@ -153,7 +153,7 @@ export const ProfileInfo = () => {
             </div>
           </div>
 
-          <h2>Datos del domicilio</h2>
+          <h2 className="titulo">Datos del domicilio</h2>
           <div className="column">
             <div className="input-box">
               <label>Estado:</label>
@@ -179,7 +179,7 @@ export const ProfileInfo = () => {
 
           </div>
 
-          <h2>Cambiar contraseña</h2>
+          <h2 className="titulo">Cambiar contraseña</h2>
           <div className="password-box">
           <label>Contraseña actual</label>
           <div className="input-icon-container">
@@ -227,9 +227,12 @@ export const ProfileInfo = () => {
 
         {passwordError && <p className="error-message">{passwordError}</p>}
 
-          <button type="submit" disabled={loading}>
+        <div className="save-button">
+
+        <button className="btn btn-primary " type="submit" disabled={loading}>
             {loading ? "Guardando..." : "Guardar cambios"}
           </button>
+        </div>
         </div>
 
       </form>
@@ -237,6 +240,7 @@ export const ProfileInfo = () => {
       {/* Modales */}
       <Modal
         isOpen={showConfirmModal}
+        icon={<i className="fas fa-save"></i>}
         title="¿Guardar cambios?"
         message="¿Estás seguro de que deseas actualizar tu información?"
         onConfirm={handleConfirmUpdate}
@@ -248,6 +252,7 @@ export const ProfileInfo = () => {
 
       <Modal
         isOpen={showSuccessModal}
+        icon={<i className="fas fa-check"></i>}
         title="¡Éxito!"
         message="Tu información fue actualizada correctamente."
         onConfirm={() => setShowSuccessModal(false)}

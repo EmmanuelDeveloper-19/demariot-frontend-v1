@@ -1,0 +1,21 @@
+
+.titulo,
+.texto {
+    color: var(--text-color)
+}
+
+.text-success {
+    background: var(--primary-medium);
+    color: white;
+}
+
+.text-info {
+    background: var(--alert);
+    color: white;
+}
+
+.texto {
+    font-size: 24px;
+    color: var(--text-color);
+
+}

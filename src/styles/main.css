@@ -1,0 +1,27 @@
+@import '../styles/variables.css';
+@import '../styles/components/button.css';
+@import '../styles/layout.css';
+@import '../styles/components/card.css';
+@import '../styles/components/text.css';
+@import '../styles/components/form.css';
+@import '../styles/components/sidebar.css';
+@import '../styles/components/navbar.css';
+@import '../styles/components/table.css';
+@import '../styles/components/shape.css';
+@import '../styles/global.responsive.css';
+@import '../styles/components/color.css';
+@import '../styles/pages/home.css';
+@import '../styles/pages/mapa.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    pointer-events: auto !important;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--background-color);
+
+}

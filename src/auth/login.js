@@ -27,7 +27,7 @@ export const Login = () => {
         <div className="login-container">
             <div className="login-card">
                 <div className="form-container">
-                    <h1>Login</h1>
+                    <h1>Inicio de sesión</h1>
                     <form onSubmit={handleLogin}>
                         <label>Email:</label>
                         <div className="input-icon-container">
@@ -57,7 +57,7 @@ export const Login = () => {
                             />
                         </div>
                         {error && <p className="error-message">{error}</p>}
-                        <button type="submit">Ingresar</button>
+                        <button className="btn btn-primary" type="submit">Ingresar</button>
                         <div className="forgot-password">
                             <p>¿Olvidaste tu contraseña?</p>
                             <Link className="link" to="/reset-password">Recuperar contraseña</Link>

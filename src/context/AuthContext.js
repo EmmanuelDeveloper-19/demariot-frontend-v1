@@ -124,7 +124,9 @@ export const AuthProvider = ({ children }) => {
         catch (error) {
             return { success: false, error };
         }
+
     };
+
     const crearMensaje = async (formData) => {
         try {
             const token = localStorage.getItem("token");
@@ -247,17 +249,23 @@ export const AuthProvider = ({ children }) => {
                     "Authorization": `Bearer ${token}`
                 }
             });
-
+    
+            // Solo actualiza currentUser si es el mismo usuario
             const updatedUser = response.data.user;
-            localStorage.setItem("user", JSON.stringify(updatedUser));
-            setCurrentUser(updatedUser);
-
-            return { success: true, user: updateUser };
+    
+            // Verifica si el usuario actualizado es el actual usuario logueado
+            if (updatedUser._id === currentUser._id) {
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                setCurrentUser(updatedUser);
+            }
+    
+            return { success: true, user: updatedUser };
         }
         catch (error) {
-            return { succes: false, error };
+            return { success: false, error };
         }
     }
+    
 
     // Eliminar usuario
     const deleteUser = async (userId) => {

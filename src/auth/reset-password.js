@@ -38,7 +38,7 @@ export const ResetPassword = () => {
 
                         </div>
                         {error && <p className="error-message">{error}</p>}
-                        <button type="submit">Recuperar contraseña</button>
+                        <button className="btn btn-primary" type="submit">Recuperar contraseña</button>
                     </form>
                 </div>
             </div>

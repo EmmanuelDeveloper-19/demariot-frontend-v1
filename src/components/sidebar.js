@@ -1,19 +1,16 @@
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useContext } from "react";
-import { ThemeContext } from "../context/DarkModeContext";
 
 export const Sidebar = ({ isOpen, toggleSidebar }) => {
     const { currentUser } = useAuth();
-    const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
         <aside className={`sidebar ${!isOpen ? 'collapsed' : ''}`}>
             <div className="logo">
                 <img className="logo" src={logo} alt="logo" />
                 <h1 style={{ "color": "white" }}>Demariot</h1>
-                <button onClick={toggleSidebar} className="hamburger-btn2">
+                <button onClick={toggleSidebar} className="btn-icon color-white hamburger-btn2">
                     <i className="fas fa-bars"></i>
                 </button>
             </div>
@@ -90,9 +87,7 @@ export const Sidebar = ({ isOpen, toggleSidebar }) => {
                         </ul>
                     </div>
                 </nav>
-                <button onClick={toggleTheme}>
-                    Cambiar a modo {theme === 'light' ? 'oscuro' : 'claro'}
-                </button>
+
             </div>
         </aside>
     );

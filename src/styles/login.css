@@ -3,11 +3,11 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background-color: var(--primary-dark);
 }
 
 .login-card {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.593);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -22,7 +22,7 @@
 .form-container h1 {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #333;
+    color: var(--text-color);
 }
 
 form {
@@ -43,6 +43,7 @@ input {
     font-size: 1rem;
 }
 
+/*
 button {
     background-color: #4a90e2;
     color: white;
@@ -57,7 +58,8 @@ button {
 
 button:hover {
     background-color: #357ae8;
-}
+} 
+*/
 
 .error-message {
     color: #e74c3c;
@@ -82,7 +84,7 @@ button:hover {
 
 .input-icon-container input {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 99em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;

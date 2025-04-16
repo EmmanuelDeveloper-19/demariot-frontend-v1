@@ -1,7 +1,8 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import nouserimage from "../assets/no_user_image.png";
+import { ThemeContext } from "../context/DarkModeContext";
 const API_BASE_URL = process.env.REACT_APP_FOTOS;
 
 export const Navbar = ({ toggleSidebar, isOpen }) => {
@@ -10,6 +11,7 @@ export const Navbar = ({ toggleSidebar, isOpen }) => {
     const [showNotifications, setShowNotifications] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
     const [mensajes, setMensajes] = useState([]);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     const fetchMensajes = async () => {
         if (!currentUser) return;
@@ -50,30 +52,43 @@ export const Navbar = ({ toggleSidebar, isOpen }) => {
                 setShowSettings(false);
             }
         };
-    
+
         // Lógica para obtener mensajes con intervalo
         fetchMensajes();
         const interval = setInterval(fetchMensajes, 3000);
-    
+
         // Lógica para cerrar dropdowns al hacer clic fuera
         document.addEventListener("mousedown", handleClickOutside);
-    
+
         return () => {
             clearInterval(interval);
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [currentUser]);
-    
+
 
     const unreadCount = mensajes.filter(msg => !msg.leido).length;
 
     return (
         <header className={`navbar ${!isOpen ? '' : 'collapsed'}`}>
-            <button onClick={toggleSidebar} className="hamburger-btn">
+            <button onClick={toggleSidebar} className="btn-icon hamburger-btn">
                 <i className="fas fa-bars"></i>
             </button>
             <div className="navbar-content">
+                <div className="notification-container">
+                    <button className="btn-icon" onClick={toggleTheme}>
+                        {theme === 'light' ? (
+                            <>
+                                <i className="fas fa-moon"></i> 
+                            </>
+                        ) : (
+                            <>
+                                <i className="fas fa-sun"></i> 
+                            </>
+                        )}
+                    </button>
 
+                </div>
                 <div className="notification-container" ref={notificationRef}>
                     <button
                         className="notification-icon"
@@ -124,8 +139,6 @@ export const Navbar = ({ toggleSidebar, isOpen }) => {
 
                 </div>
                 <div className="user-profile">
-
-
                     <div className="user-info">
                         <p className="user-name">{currentUser?.first_name || "Usuario"}</p>
                     </div>

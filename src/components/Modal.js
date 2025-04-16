@@ -1,22 +1,27 @@
 import React from "react";
-import "../styles/modal.css";
+import "../styles/components/modal.css";
 
-export const Modal = ({ isOpen, title, message, onConfirm, onCancel, confirmText = "Aceptar", cancelText = "Cancelar", onlyConfirm = false }) => {
+export const Modal = ({ isOpen, title, message, onConfirm, onCancel, confirmText = "Aceptar", cancelText = "Cancelar", onlyConfirm = false, icon = null }) => {
 
     if (!isOpen) return null;
 
-    return(
+    return (
         <div className="modal-overlay">
             <div className="modal-box">
+                {icon && (
+                    <div className="modal-icon-container">
+                        <span className="modal-icon">{icon}</span>
+                    </div>
+                )}
                 <h2>{title}</h2>
                 <p>{message}</p>
                 <div className="modal-buttons">
                     {!onlyConfirm && (
-                        <button className="btn cancel" onClick={onCancel}>
+                        <button className="btn btn-cancel w-100" onClick={onCancel}>
                             {cancelText}
                         </button>
                     )}
-                    <button className="btn confirm" onClick={onConfirm}>
+                    <button className="btn btn-primary w-100" onClick={onConfirm}>
                         {confirmText}
                     </button>
                 </div>
