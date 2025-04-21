@@ -36,7 +36,7 @@ export const Sidebar = ({ isOpen, toggleSidebar }) => {
                                 </li>
                             )}
                             <li title="Ver mapa en tiempo real">
-                                <Link to="/dashboard/mapa">
+                                <Link to="/dashboard/maps">
                                     <i className="fas fa-map"></i>
                                     <p>Mapa en tiempo real</p>
                                 </Link>

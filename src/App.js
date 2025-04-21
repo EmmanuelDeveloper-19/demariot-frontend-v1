@@ -18,6 +18,7 @@ import { Prototype } from "./pages/proto/prototipo";
 import { HistorialAlertas } from "./pages/alertHistory/alertHistory";
 import { Logs } from "./pages/logs/logs";
 import { Chat, Mensajes } from "./pages/mensajeria/mensajeria";
+import { MapaContaminacion } from "./pages/mapa/maps";
 
 export function App() {
   return (
@@ -44,6 +45,7 @@ export function App() {
           <Route path="alertHistorial" element={<HistorialAlertas/>}/>
           <Route path="mensajes" element={<Mensajes/>}/>
           <Route path="chat/:id" element={<Chat/>}/>
+          <Route path="maps" element={<MapaContaminacion/>}/>
 
 
           {/* Subrutas protegidas SOLO para admin */}
