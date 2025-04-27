@@ -1,6 +1,6 @@
 // components/form/SelectField.js
 export const SelectField = ({ label, value, onChange, options }) => (
-    <div className="select-box">
+    <div className="input-box">
       <label>{label}</label>
       <select value={value} onChange={onChange}>
         <option>Selecciona el rol del usuario</option>

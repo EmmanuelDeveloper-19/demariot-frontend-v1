@@ -12,6 +12,7 @@
 @import '../styles/components/color.css';
 @import '../styles/pages/home.css';
 @import '../styles/pages/mapa.css';
+@import '../styles/pages/usuarios.css';
 
 * {
     margin: 0;

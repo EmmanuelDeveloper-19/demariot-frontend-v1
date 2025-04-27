@@ -70,7 +70,7 @@ export const UserCreate = () => {
                     <InputField label="Teléfono" type="number" name="phone" value={userData.phone} onChange={handleChange("phone")} error={errors.phone} />
                 </div>
 
-                <h3>Dirección</h3>
+                <h3 className="titulo">Dirección</h3>
                 <div className="column">
                     <InputField label="Calle" type="text" name="street" value={userData.address.street} onChange={handleChange("street")} />
                     <InputField label="Ciudad" type="text" name="city" value={userData.address.city} onChange={handleChange("city")} />
@@ -80,7 +80,7 @@ export const UserCreate = () => {
                     <InputField label="Código postal" type="text" name="zip" value={userData.address.zip} onChange={handleChange("zip")} error={errors.zip} />
                 </div>
 
-                <h3>Privilegios y autenticación</h3>
+                <h3 className="titulo">Privilegios y autenticación</h3>
                 <SelectField
                     label="Rol del usuario"
                     value={userData.role}

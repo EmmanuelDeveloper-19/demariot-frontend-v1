@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import { Login } from "./auth/login";
 import { ProtectedRoutes } from "./services/ProtectedRoute";
 import { Home } from "./pages/home/home";
@@ -27,6 +28,7 @@ export function App() {
         <Route index element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword/>}/>
+        <Route path="/mensaje" element={<Mensaje/>}/>
 
         <Route
           path="/dashboard"
@@ -46,7 +48,7 @@ export function App() {
           <Route path="mensajes" element={<Mensajes/>}/>
           <Route path="chat/:id" element={<Chat/>}/>
           <Route path="maps" element={<MapaContaminacion/>}/>
-
+          
 
           {/* Subrutas protegidas SOLO para admin */}
           <Route

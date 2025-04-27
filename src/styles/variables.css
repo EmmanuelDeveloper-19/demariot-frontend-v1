@@ -4,10 +4,14 @@
     /*--primary-dark: #0c529c;*/
     --primary: #006bff;
     --primary-medium: #3cc8ff;
-    --primary-dark: #0a3671;
+    /*--primary-dark: #0a3671 002244;*/
+    --primary-dark: #002244;
+    --primary-dark-hover: #2d5d9c;
     --primary-light: #d3f2ff;
     --background-color: #f0f0f0;
     --bg-container: #ffffff;
+    --bg-input: #000;
+    --text-input-colo: white;
 
     --primary-hover: #0084ff;
 
@@ -42,11 +46,13 @@
     --primary: #3cc8ff;
     --primary-medium: #66d9ff;
     --primary-dark: #0a3671;
-    --primary-light: #0a2540;
+    --primary-light: rgb(38, 44, 60,0.95);
     --primary-hover: #5bd4ff;
+    --bg-input:white;
+    --text-input-colo: #000 ;
 
-    --background-color: #121212;
-    --bg-container: #1e1e1e;
+    --background-color: #0f0f0f;
+    --bg-container: #0f0f0f;
 
     --text-color: #e5e7eb;
     --text-primary-dark: #ffffff;

@@ -4,6 +4,7 @@
     color: var(--text-color)
 }
 
+
 .text-success {
     background: var(--primary-medium);
     color: white;
@@ -19,3 +20,17 @@
     color: var(--text-color);
 
 }
+
+.flex
+{
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttons-container
+{
+    display:flex;
+    flex-direction: row;
+}
+
+

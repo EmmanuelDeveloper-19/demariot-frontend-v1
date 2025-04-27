@@ -39,11 +39,15 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const logout = () => {
+    const logout = async () => {
+        await axios.post(`${API_BASE_URL}/logout`);
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+
         setCurrentUser(null);
+
         delete axios.defaults.headers.common['Authorization'];
+
         return true;
     }
 
@@ -66,7 +70,7 @@ export const AuthProvider = ({ children }) => {
                 }
             }
 
-            const response = await axios.put(`${API_BASE_URL}/users/${userId}`, formData, {
+            const response = await axios.put(`${API_BASE_URL}/updateUser/${userId}`, formData, {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
@@ -88,7 +92,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.put(
-                `${API_BASE_URL}/changePassword/${userId}/password`,
+                `${API_BASE_URL}/changePassword/${userId}`,
                 {
                     currentPassword,
                     newPassword,
@@ -107,6 +111,15 @@ export const AuthProvider = ({ children }) => {
             return { success: false, error: error.response?.data?.message || "Error desconocido" };
         }
     };
+
+    const recoveryPassword = async(email) =>{
+        try{
+            const response = await axios.post(`${API_BASE_URL}/recovery-password`, {email});
+            return {success:true}
+        } catch (error){
+            console.log("Error! lol");
+        }
+    }
 
 
     // Crear usuario
@@ -294,6 +307,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         updateUser,
         changePassword,
+        recoveryPassword,
         createUser,
         createMultipleUsers,
         getUsers,

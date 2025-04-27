@@ -48,11 +48,9 @@
     width: 100%;
     outline: none;
     border: 1px solid #ddd;
-    border-radius: 99em;
     margin-top: 8px;
     padding: 0 15px;
     font-size: 1rem;
-    color: var(--text-color);
 }
 
 .form :where(.input-box input:focus) {
@@ -66,8 +64,7 @@ select {
     position: relative;
     border: 1px solid #d1d5db;
     border-radius: 99em;
-    color: #374151;
-    background-color: #fff;
+    background-color: var(--bg-color);
     outline: none;
     font-size: 1rem;
     margin-top: 8px;

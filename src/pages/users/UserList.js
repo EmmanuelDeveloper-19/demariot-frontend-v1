@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { Modal } from '../../components/Modal';
 import { useUsers } from '../../hooks/useUsers';
 import { exportUsersToExcel, importUsersFromExcel } from '../../utils/excelUtils';
+import nouserimage from "../../assets/no_user_image.png";
 import { usePagination } from '../../hooks/usePagination';
+const API_BASE_URL = process.env.REACT_APP_FOTOS;
+
 
 export const UserList = () => {
     const [showEditModal, setShowEditModal] = useState(false);
@@ -90,26 +93,30 @@ export const UserList = () => {
 
     return (
         <>
-            <h2 className='titulo'>Gestión de Usuarios</h2>
             <div className='container'>
-                <div className='row flex-right'>
-                    <label className='btn btn-outline-primary m-10'>
-                        <i className='fas fa-upload' /> Importar excel
-                        <input
-                            type="file"
-                            accept='.xlsx, .xls'
-                            style={{ display: 'none' }}
-                            onChange={handleImport}
-                        />
-                    </label>
 
-                    <button onClick={() => exportUsersToExcel(users)} className='btn btn-outline-primary m-10'>
-                        <i className='fas fa-file-excel' /> Descargar Excel
-                    </button>
+                <div className='row flex'>
+                    <h2 className='titulo'>Gestión de Usuarios</h2>
 
-                    <Link to="/dashboard/agregarUsuario" className='btn btn-primary m-10'>
-                        <i className='fas fa-plus' /> Agregar Usuario
-                    </Link>
+                    <div className='buttons-container'>
+                        <label className='btn btn-outline-primary m-10'>
+                            <i className='fas fa-upload' /> Importar excel
+                            <input
+                                type="file"
+                                accept='.xlsx, .xls'
+                                style={{ display: 'none' }}
+                                onChange={handleImport}
+                            />
+                        </label>
+
+                        <button onClick={() => exportUsersToExcel(users)} className='btn btn-outline-primary m-10'>
+                            <i className='fas fa-file-excel' /> Descargar Excel
+                        </button>
+
+                        <Link to="/dashboard/agregarUsuario" className='btn btn-primary m-10'>
+                            <i className='fas fa-plus' /> Agregar Usuario
+                        </Link>
+                    </div>
                 </div>
 
                 <div className='table-container m-10'>
@@ -117,7 +124,7 @@ export const UserList = () => {
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nombre</th>
+                                <th>Nombre del usuario</th>
                                 <th>Email</th>
                                 <th>Rol</th>
                                 <th>Acciones</th>
@@ -127,7 +134,23 @@ export const UserList = () => {
                             {paginatedUsers.map((user, index) => (
                                 <tr key={user._id}>
                                     <td>{(currentPage - 1) * 5 + index + 1}</td>
-                                    <td>{user.first_name} {user.last_name}</td>
+                                    <td className='row center'>
+                                        {user?.profile_picture ? (
+                                            <img
+                                                src={`${API_BASE_URL}${user.profile_picture}`}
+
+                                                alt="Foto de perfil"
+                                                className="icon-user"
+                                            />
+                                        ) : (
+                                            <img
+                                                src={nouserimage}
+                                                alt="Foto de perfil por defecto"
+                                                className="icon-user"
+                                            />
+                                        )}
+                                        <p>{user.first_name} {user.last_name}</p>
+                                    </td>
                                     <td>{user.email}</td>
                                     <td >
                                         <p className={user.role === 'admin' ? 'btn btn-outline-primary-light btn-disabled m-10' : 'btn btn-outline-yellow-light m-10'}>
@@ -135,14 +158,21 @@ export const UserList = () => {
                                         </p>
                                     </td>
 
-                                    <td className='table-options'>
-                                        <Link to={`/dashboard/usuarioInfo/${user._id}`} className='btn btn-success m-10'>
-                                            <i className='fas fa-eye' />
+                                    <td>
+                                        <Link to={`/dashboard/usuarioInfo/${user._id}`} style={{textDecoration: "none", justifyContent: "center", display: "flex"}} >
+                                            <button className='btn btn-success'>
+                                            <i className='fas fa-eye'/>
+                                            </button>
                                         </Link>
-                                        <button onClick={() => handleEdit(user)} className='btn btn-info m-10'>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleEdit(user)} className='btn btn-info '>
                                             <i className='fas fa-pencil' />
                                         </button>
-                                        <button onClick={() => handleDelete(user)} className='btn btn-danger m-10'>
+
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleDelete(user)} className='btn btn-danger '>
                                             <i className='fas fa-trash' />
                                         </button>
                                     </td>

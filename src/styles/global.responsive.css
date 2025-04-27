@@ -126,4 +126,106 @@
     {
         right: -90px;
     }
+
+    .login-container
+    {
+        display: flex;
+        flex-direction: column-reverse;
+        position: relative;
+        overflow: hidden;
+        background: var(--primary-dark);
+    }
+
+    .login-container .container-right
+    {
+        display: flex;
+        width: 100%;
+        height: 40%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+      
+    }
+
+    .login-container .container-right img
+    {
+        width: 100px;
+    }
+
+    .login-container .container-right h1
+    {
+        font-size: 32px;
+    }
+
+    .login-container .container-right p
+    {
+        font-size: 18px;
+        width: 100%;
+    }
+
+    .login-container .container-left
+    {
+        position: absolute;
+        width: 100%;
+        padding: 30px;
+        height: 60%;
+        border-top-left-radius: 25px; /* Radio superior izquierdo */
+        border-top-right-radius: 25px; /* Radio superior derecho */
+    }
+    
+    .responsive
+    {
+        display: inline;
+    }
+
+    .form-container .primero
+    {
+        display: none;
+    }
+
+    .form-container h1
+    {
+        font-size: 32px;
+        font-weight: lighter;
+    }
+
+    .form-container h2
+    {
+        font-weight: lighter;
+    }
+
+    .form-group label
+    {
+        font-weight: lighter;
+    }
+
+    .form-group input
+    {
+        background: none;
+        border: 1px solid var(--text-color);
+    }
+
+    .forgot-password
+    {
+        font-size: 14px;
+        display: block;
+    }
+
+    .forgot-password p
+    {
+        margin-right: 0;
+    }
+
+    .forgot-password .link  
+    {
+        font-weight: lighter;
+    }
+
+    .form-container button
+    {
+        border-radius: 5px;
+    }
+
+
 }
