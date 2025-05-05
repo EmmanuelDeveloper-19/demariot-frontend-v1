@@ -1,14 +1,15 @@
 import { useParams } from "react-router-dom"
-import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import nouserimage from "../../assets/no_user_image.png";
+import { Breadcrumb } from "../../components/breadcrumb";
+import { Usuarios } from "../../context/UserContext";
 
 const API_BASE_URL = process.env.REACT_APP_FOTOS;
 
 export const UserDetail = () => {
 
     const { id } = useParams();
-    const { getUserById } = useAuth();
+    const { getUserById } = Usuarios();
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -25,10 +26,18 @@ export const UserDetail = () => {
         return <div>Cargando..</div>
     }
 
+    const breadcrumbItems = [
+        {name: "Inicio", path: "/dashboard-admin/home"},
+        {name: "Usuarios", path: "/dashboard-admin/usuarios"},
+        {name: `Información del usuario ${user.first_name}  ${user.last_name}` }        
+    ]
+
     return (
-        <div className='container'>
-            <header>Información del usuario</header>
-                <div className="profile-picture-wrapper">
+        <>
+        <Breadcrumb items={breadcrumbItems}/>
+            <div className="container">
+                <header>Información del usuario</header>
+                <div className="profile-picture-wrapper-large">
                     <img
                         src={user.profile_picture ? `${API_BASE_URL}${user.profile_picture}` : nouserimage}
                         alt="Imagen de perfil"
@@ -37,80 +46,81 @@ export const UserDetail = () => {
 
                 </div>
 
-            <form className="form">
-                <h3 className="titulo">Datos de perfil</h3>
-                <div className="column">
-                    <div className="input-box">
-                        <label>Nombre del usuario</label>
-                        <input type="text" disabled value={user?.first_name || null} />
+                <form className="form mt-1">
+                    <h3 className="text-title text-primary">Datos de perfil</h3>
+                    <div className="column mt-1">
+                        <div className="input-box">
+                            <label>Nombre del usuario</label>
+                            <input type="text" disabled value={user?.first_name || null} />
+                        </div>
+                        <div className="input-box">
+                            <label>Apellidos</label>
+                            <input type="text" disabled value={user?.last_name || null} />
+                        </div>
                     </div>
-                    <div className="input-box">
-                        <label>Apellidos</label>
-                        <input type="text" disabled value={user?.last_name || null} />
-                    </div>
-                </div>
 
-                <div className="column">
-                    <div className="input-box">
-                        <label>Correo electrónico</label>
-                        <input type="email" disabled value={user?.email || null} />
+                    <div className="column mt-1">
+                        <div className="input-box">
+                            <label>Correo electrónico</label>
+                            <input type="email" disabled value={user?.email || null} />
+                        </div>
+                        <div className="input-box">
+                            <label>Teléfono de contacto</label>
+                            <input type="text" disabled value={user?.phone || null} />
+                        </div>
                     </div>
-                    <div className="input-box">
-                        <label>Teléfono de contacto</label>
-                        <input type="text" disabled value={user?.phone || null} />
-                    </div>
-                </div>
 
-                <div className="column">
-                    <div className="input-box">
-                        <label>Rol del usuario</label>
-                        <input type="text" disabled value={user?.role || null} />
+                    <div className="column mt-1">
+                        <div className="input-box">
+                            <label>Rol del usuario</label>
+                            <input type="text" disabled value={user?.role || null} />
+                        </div>
+                        <div className="input-box">
+                            <label></label>
+                        </div>
                     </div>
-                    <div className="input-box">
-                        <label></label>
-                    </div>
-                </div>
 
-                <h3 className="titulo">Datos de domicilio</h3>
-                <div className="column">
-                    <div className="input-box">
-                        <label>Estado</label>
-                        <input type="text" disabled value={user?.address.state || null}></input>
+                    <h3 className="text-title text-primary mt-1">Datos de domicilio</h3>
+                    <div className="column mt-1">
+                        <div className="input-box">
+                            <label>Estado</label>
+                            <input type="text" disabled value={user?.address.state || null}></input>
+                        </div>
+                        <div className="input-box">
+                            <label>Municipio</label>
+                            <input type="text" disabled value={user?.address.city || null}></input>
+                        </div>
                     </div>
-                    <div className="input-box">
-                        <label>Municipio</label>
-                        <input type="text" disabled value={user?.address.city || null}></input>
+                    <div className="column mt-1">
+                        <div className="input-box">
+                            <label>Calle</label>
+                            <input type="text" disabled value={user?.address.street || null}></input>
+                        </div>
+                        <div className="input-box">
+                            <label>Código postal</label>
+                            <input type="text" disabled value={user?.address.zip || null}></input>
+                        </div>
                     </div>
-                </div>
-                <div className="column">
-                    <div className="input-box">
-                        <label>Calle</label>
-                        <input type="text" disabled value={user?.address.street || null}></input>
+
+                    <h3 className="text-title text-primary mt-1">Actividad del usuario</h3>
+                    <div className="input-box mt-1">
+                        <label>Fecha de creación del usuario</label>
+                        <input type="text" disabled value={user?.created_at || null} />
                     </div>
-                    <div className="input-box">
-                        <label>Código postal</label>
-                        <input type="text" disabled value={user?.address.zip || null}></input>
+
+                    <div className="input-box mt-1">
+                        <label>Fecha de útlimo inicio de sesión</label>
+                        <input type="text" disabled value={user?.last_login || null} />
                     </div>
-                </div>
 
-                <h3 className="titulo">Actividad del usuario</h3>
-                <div className="input-box">
-                    <label>Fecha de creación del usuario</label>
-                    <input type="text" disabled value={user?.created_at || null} />
-                </div>
+                    <div className="input-box mt-1">
+                        <label>Fecha de última actualización de datos del usuario</label>
+                        <input type="text" disabled value={user?.updated_at || null} />
+                    </div>
+                </form>
 
-                <div className="input-box">
-                    <label>Fecha de útlimo inicio de sesión</label>
-                    <input type="text" disabled value={user?.last_login || null} />
-                </div>
-
-                <div className="input-box">
-                    <label>Fecha de última actualización de datos del usuario</label>
-                    <input type="text" disabled value={user?.updated_at || null} />
-                </div>
-            </form>
-
-        </div>
+            </div>
+        </>
     );
 
 }

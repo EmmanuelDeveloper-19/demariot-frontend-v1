@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { Modal } from '../../components/Modal';
-import { useUsers } from '../../hooks/useUsers';
+import { useUsersHoook } from '../../hooks/useUsers';
 import { exportUsersToExcel, importUsersFromExcel } from '../../utils/excelUtils';
 import nouserimage from "../../assets/no_user_image.png";
 import { usePagination } from '../../hooks/usePagination';
+import { Usuarios } from '../../context/UserContext';
 const API_BASE_URL = process.env.REACT_APP_FOTOS;
 
 
@@ -17,7 +18,7 @@ export const UserList = () => {
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [selectedRole, setSelectedRole] = useState('');
 
-    const { users, setUsers } = useUsers();
+    const { users, setUsers } = useUsersHoook();
     const {
         currentData: paginatedUsers,
         currentPage,
@@ -26,7 +27,8 @@ export const UserList = () => {
         prev,
         jump,
     } = usePagination(users, 5);
-    const { updateUserRol, deleteUser, createMultipleUsers, getUsers, currentUser } = useAuth();
+    const { currentUser } = useAuth();
+    const { createMultipleUsers, updateUserRol, getUsers, deleteUser } = Usuarios();
 
     const handleEdit = (user) => {
         setSelectedUserId(user._id);
@@ -82,7 +84,8 @@ export const UserList = () => {
 
             if (response.success) {
                 const { users } = await getUsers();
-                setUsers(users);
+                const filteredUsers = users.filter(user => user._id !== currentUser?._id);
+                setUsers(filteredUsers);
                 setShowSuccessModal(true);
             } else throw new Error("Error al importar");
         } catch (error) {
@@ -94,11 +97,12 @@ export const UserList = () => {
     return (
         <>
             <div className='container'>
+                <div className='row'>
+                    <div className='col-md-6 d-flex  align-items-center'>
+                        <h2 className='text-subtitle text-primary'>Gestión de Usuarios</h2>
+                    </div>
 
-                <div className='row flex'>
-                    <h2 className='titulo'>Gestión de Usuarios</h2>
-
-                    <div className='buttons-container'>
+                    <div className='col-md-6 d-flex gap'>
                         <label className='btn btn-outline-primary m-10'>
                             <i className='fas fa-upload' /> Importar excel
                             <input
@@ -109,70 +113,68 @@ export const UserList = () => {
                             />
                         </label>
 
-                        <button onClick={() => exportUsersToExcel(users)} className='btn btn-outline-primary m-10'>
+                        <button onClick={() => exportUsersToExcel(users.filter(user => user._id !== currentUser?._id))} className='btn btn-outline-primary m-10'>
                             <i className='fas fa-file-excel' /> Descargar Excel
                         </button>
 
-                        <Link to="/dashboard/agregarUsuario" className='btn btn-primary m-10'>
+                        <Link to="/dashboard-admin/agregarUsuario" className='btn btn-primary m-10'>
                             <i className='fas fa-plus' /> Agregar Usuario
                         </Link>
                     </div>
                 </div>
 
-                <div className='table-container m-10'>
+                <div className='table-container mt-1'>
                     <table className='content-table'>
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th></th>
                                 <th>Nombre del usuario</th>
                                 <th>Email</th>
                                 <th>Rol</th>
                                 <th>Acciones</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             {paginatedUsers.map((user, index) => (
                                 <tr key={user._id}>
                                     <td>{(currentPage - 1) * 5 + index + 1}</td>
-                                    <td className='row center'>
+                                    <td>
                                         {user?.profile_picture ? (
                                             <img
                                                 src={`${API_BASE_URL}${user.profile_picture}`}
 
                                                 alt="Foto de perfil"
-                                                className="icon-user"
+                                                className="profile-picture-small"
                                             />
                                         ) : (
                                             <img
                                                 src={nouserimage}
                                                 alt="Foto de perfil por defecto"
-                                                className="icon-user"
+                                                className="profile-picture-small"
                                             />
                                         )}
+                                    </td>
+                                    <td>
                                         <p>{user.first_name} {user.last_name}</p>
                                     </td>
                                     <td>{user.email}</td>
                                     <td >
-                                        <p className={user.role === 'admin' ? 'btn btn-outline-primary-light btn-disabled m-10' : 'btn btn-outline-yellow-light m-10'}>
+                                        <span className={user.role === 'admin' ? 'btn-badge btn-outline-primary-light btn-disabled m-10' : 'btn-badge btn-outline-yellow-light m-10'}>
                                             {user.role}
-                                        </p>
+                                        </span>
                                     </td>
-
-                                    <td>
-                                        <Link to={`/dashboard/usuarioInfo/${user._id}`} style={{textDecoration: "none", justifyContent: "center", display: "flex"}} >
-                                            <button className='btn btn-success'>
-                                            <i className='fas fa-eye'/>
-                                            </button>
+                                    <td className='row gap'>
+                                        <Link to={`/dashboard-admin/usuarioInfo/${user._id}`} className='btn-icono btn-small btn-success' >
+                                            <i className='fas fa-eye' />
                                         </Link>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => handleEdit(user)} className='btn btn-info '>
+
+
+                                        <button onClick={() => handleEdit(user)} className='btn-small btn-info '>
                                             <i className='fas fa-pencil' />
                                         </button>
-
-                                    </td>
-                                    <td>
-                                        <button onClick={() => handleDelete(user)} className='btn btn-danger '>
+                                        <button onClick={() => handleDelete(user)} className='btn-small btn-danger '>
                                             <i className='fas fa-trash' />
                                         </button>
                                     </td>
@@ -182,24 +184,26 @@ export const UserList = () => {
                     </table>
 
                 </div>
-                <div className="row flex-left">
-                    <button onClick={prev} disabled={currentPage === 1} className="btn btn-outline-secondary m-10">
-                        &laquo; Anterior
-                    </button>
-
-                    {[...Array(maxPage)].map((_, i) => (
-                        <button
-                            key={i}
-                            onClick={() => jump(i + 1)}
-                            className={`btn ${currentPage === i + 1 ? 'btn-info m-10' : 'btn-outline-secondary m-10'}`}
-                        >
-                            {i + 1}
+                <div className="row mt-10">
+                    <div className='col-md-6 d-flex gap'>
+                        <button onClick={prev} disabled={currentPage === 1} className="btn btn-outline-secondary m-10">
+                            &laquo; Anterior
                         </button>
-                    ))}
 
-                    <button onClick={next} disabled={currentPage === maxPage} className="btn btn-outline-secondary m-10">
-                        Siguiente &raquo;
-                    </button>
+                        {[...Array(maxPage)].map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => jump(i + 1)}
+                                className={`btn ${currentPage === i + 1 ? 'btn-info m-10' : 'btn-outline-secondary m-10'}`}
+                            >
+                                {i + 1}
+                            </button>
+                        ))}
+
+                        <button onClick={next} disabled={currentPage === maxPage} className="btn btn-outline-secondary m-10">
+                            Siguiente &raquo;
+                        </button>
+                    </div>
                 </div>
 
                 {/* Modales */}
@@ -207,7 +211,7 @@ export const UserList = () => {
                     isOpen={showEditModal}
                     title="Editar rol del usuario"
                     message={
-                        <div className='form-modal'>
+                        <div className='flex-column'>
                             <label><span className="required">* </span>Selecciona el nuevo rol del usuario</label>
                             <select value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
                                 <option value="user">Usuario</option>

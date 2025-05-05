@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/components/modal.css";
 
 export const Modal = ({ isOpen, title, message, onConfirm, onCancel, confirmText = "Aceptar", cancelText = "Cancelar", onlyConfirm = false, icon = null }) => {
 

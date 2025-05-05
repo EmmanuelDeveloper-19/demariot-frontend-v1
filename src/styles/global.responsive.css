@@ -1,27 +1,57 @@
-/* Estilos responsivos */
-.tonotos {
-    width: 200px;
-}
-
-.hamburger-btn2 {
-    display: none;
-    margin: 0;
-    background: none;
-    font-size: 24px;
-}
-
-.hamburger-btn2:hover {
-    background: none;
-    color: black;
-}
-
 @media screen and (max-width: 500px) {
-    .form .column {
-        flex-wrap: wrap;
+
+    /* ======= TEXTS SIZES ======== */
+    .text-display {
+        font-size: 3rem;
     }
 
+    .text-title {
+        font-size: 2.25rem;
+    }
+
+    .text-subtitle {
+        font-size: 1.875rem;
+    }
+
+    .text-heading {
+        font-size: 1.5rem;
+    }
+
+    .text-body {
+        font-size: 1.125rem;
+    }
+
+    .text-caption {
+        font-size: 1rem;
+    }
+
+    .login-container {
+        width: 100%;
+        height: 100vh;
+        background: var(--primary-dark);
+    }
+
+    .login-card {
+        height: 100%;
+        width: 100%;
+        justify-content: start;
+    }
+
+    /*==== SIDEBAR START ==== */
     .sidebar {
         width: 0;
+    }
+
+    .sidebar .sidebar-content .nav-group .nav-list li a {
+        display: none;
+    }
+
+    .sidebar.collapsed .sidebar-content .nav-group .nav-list li a {
+        display: flex;
+    }
+
+    .sidebar.collapsed .sidebar-content .nav-group .nav-list li p {
+        display: flex;
     }
 
     .sidebar.collapsed {
@@ -29,34 +59,28 @@
         z-index: 3;
     }
 
-    .sidebar.collapsed h1
-    {
+    .sidebar.collapsed h1 {
         display: flex;
     }
 
-    .sidebar.collapsed .logo
-    {
+    .sidebar.collapsed .logo {
         display: flex;
         justify-content: space-between;
         padding: 20px 15px;
     }
 
-    .sidebar .logo
-    {
-        display: none;
-    }
-
-    .sidebar.collapsed .nav-list li p
-    {
+    .only-mobile {
         display: flex;
     }
 
-    .sidebar.collapsed .nav-list li a
-    {
-        justify-content: start;
-        padding: 12px 18px;
-    }
+    /*==== SIDEBAR FINAL ==== */
 
+    /*=== CONTAINERS ELEMENT ==== */
+    .row {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
 
     .main-content {
         margin-left: 0px;
@@ -66,166 +90,14 @@
         margin-left: 0 !important;
     }
 
-    .hamburger-btn2 {
-        margin: 0;
-        background: none;
-        font-size: 24px;
-        display: flex;
+    [class^="col-md-"] {
+        width: 100%;
+        margin-bottom: 10px;
     }
 
-    .hamburger-btn2:hover {
-        background: none;
-        color: black;
-    }
-
-    .btn {
-        min-width: 100%;
-        flex: none;
-    }
-
-    .actions-container {
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
-        gap: 0;
-        font-size: 14px;
-    }
-
-    .table-container
-    {
-        overflow-x: auto;
-    }
-
-    .row
-    {
-        display: flex;
-
-        flex-direction: column;
-    }
-
-    .content-table .table-options
-    {
+    .column {
         display: flex;
         flex-direction: column;
     }
-
-    .container
-    {
-        background: none;
-        box-shadow: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .user-name
-    {
-        display: none;
-    }
-
-    .notification-dropdown
-    {
-        right: -90px;
-    }
-
-    .login-container
-    {
-        display: flex;
-        flex-direction: column-reverse;
-        position: relative;
-        overflow: hidden;
-        background: var(--primary-dark);
-    }
-
-    .login-container .container-right
-    {
-        display: flex;
-        width: 100%;
-        height: 40%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-      
-    }
-
-    .login-container .container-right img
-    {
-        width: 100px;
-    }
-
-    .login-container .container-right h1
-    {
-        font-size: 32px;
-    }
-
-    .login-container .container-right p
-    {
-        font-size: 18px;
-        width: 100%;
-    }
-
-    .login-container .container-left
-    {
-        position: absolute;
-        width: 100%;
-        padding: 30px;
-        height: 60%;
-        border-top-left-radius: 25px; /* Radio superior izquierdo */
-        border-top-right-radius: 25px; /* Radio superior derecho */
-    }
-    
-    .responsive
-    {
-        display: inline;
-    }
-
-    .form-container .primero
-    {
-        display: none;
-    }
-
-    .form-container h1
-    {
-        font-size: 32px;
-        font-weight: lighter;
-    }
-
-    .form-container h2
-    {
-        font-weight: lighter;
-    }
-
-    .form-group label
-    {
-        font-weight: lighter;
-    }
-
-    .form-group input
-    {
-        background: none;
-        border: 1px solid var(--text-color);
-    }
-
-    .forgot-password
-    {
-        font-size: 14px;
-        display: block;
-    }
-
-    .forgot-password p
-    {
-        margin-right: 0;
-    }
-
-    .forgot-password .link  
-    {
-        font-weight: lighter;
-    }
-
-    .form-container button
-    {
-        border-radius: 5px;
-    }
-
 
 }

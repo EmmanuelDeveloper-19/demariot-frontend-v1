@@ -1,72 +1,71 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useContext } from "react";
 import nouserimage from "../assets/no_user_image.png";
 import { ThemeContext } from "../context/DarkModeContext";
-const API_BASE_URL = process.env.REACT_APP_FOTOS;
+import { useEffect } from "react";
 
 export const Navbar = ({ toggleSidebar, isOpen }) => {
-    const { currentUser, logout, obtenerMensajes } = useAuth();
+    const { currentUser, logout } = useAuth();
     const navigate = useNavigate();
     const [showNotifications, setShowNotifications] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
-    const [mensajes, setMensajes] = useState([]);
     const { theme, toggleTheme } = useContext(ThemeContext);
 
-    const fetchMensajes = async () => {
-        if (!currentUser) return;
-        const res = await obtenerMensajes(currentUser._id);
-        if (res.success) {
-            const mensajesRecibidos = res.mensajes.filter(
-                msg => msg.id_destinatario === currentUser._id
-            );
-            setMensajes(mensajesRecibidos);
-        }
-    };
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
+    // Datos estáticos de mensajes
+    const mensajes = [
+        {
+            _id: "1",
+            nombre_emisor: "Juan Pérez",
+            contenido: "Hola, ¿cómo estás?",
+            createdAt: new Date(),
+            leido: false
+        },
+        {
+            _id: "2",
+            nombre_emisor: "María García",
+            contenido: "Reunión a las 3pm",
+            createdAt: new Date(Date.now() - 3600000),
+            leido: true
+        },
+        {
+            _id: "3",
+            nombre_emisor: "Carlos López",
+            contenido: "Documentos aprobados",
+            createdAt: new Date(Date.now() - 86400000),
+            leido: false
+        }
+    ];
 
     const handleLogout = async () => {
         try {
             await logout();
             navigate("/login");
         } catch (error) {
-            console.log("error al serrar sesión");
+            console.log("error al cerrar sesión");
         }
     };
 
     const notificationRef = useRef(null);
     const settingsRef = useRef(null);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                notificationRef.current &&
-                !notificationRef.current.contains(event.target)
-            ) {
-                setShowNotifications(false);
-            }
-            if (
-                settingsRef.current &&
-                !settingsRef.current.contains(event.target)
-            ) {
-                setShowSettings(false);
-            }
-        };
+    const handleClickOutside = (event) => {
+        if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+            setShowNotifications(false);
+        }
+        if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+            setShowSettings(false);
+        }
+    };
 
-        // Lógica para obtener mensajes con intervalo
-        fetchMensajes();
-        const interval = setInterval(fetchMensajes, 3000);
-
-        // Lógica para cerrar dropdowns al hacer clic fuera
-        document.addEventListener("mousedown", handleClickOutside);
-
-        return () => {
-            clearInterval(interval);
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [currentUser]);
-
-
+    // Contador de mensajes no leídos
     const unreadCount = mensajes.filter(msg => !msg.leido).length;
 
     return (
@@ -78,20 +77,16 @@ export const Navbar = ({ toggleSidebar, isOpen }) => {
                 <div className="notification-container">
                     <button className="btn-icon" onClick={toggleTheme}>
                         {theme === 'light' ? (
-                            <>
-                                <i className="fas fa-moon"></i> 
-                            </>
+                            <i className="fas fa-moon"></i>
                         ) : (
-                            <>
-                                <i className="fas fa-sun"></i> 
-                            </>
+                            <i className="fas fa-sun"></i>
                         )}
                     </button>
-
                 </div>
+                
                 <div className="notification-container" ref={notificationRef}>
                     <button
-                        className="notification-icon"
+                        className="btn-icon"
                         onClick={() => setShowNotifications(!showNotifications)}
                         aria-label="Notifications"
                     >
@@ -136,8 +131,8 @@ export const Navbar = ({ toggleSidebar, isOpen }) => {
                             )}
                         </div>
                     )}
-
                 </div>
+                
                 <div className="user-profile">
                     <div className="user-info">
                         <p className="user-name">{currentUser?.first_name || "Usuario"}</p>
@@ -145,23 +140,22 @@ export const Navbar = ({ toggleSidebar, isOpen }) => {
 
                     <div className="settings-dropdown-container" ref={settingsRef}>
                         <button
-                            className="settings-toggle"
+                            className="btn-icon"
                             onClick={() => setShowSettings(!showSettings)}
                             aria-label="User menu"
                         >
                             <div className="user-avatar">
                                 {currentUser?.profile_picture ? (
                                     <img
-                                        src={`${API_BASE_URL}${currentUser.profile_picture}`}
-
+                                        src={`${process.env.REACT_APP_FOTOS}${currentUser.profile_picture}`}
                                         alt="Foto de perfil"
-                                        className="avatar-image"
+                                        className="profile-picture-small"
                                     />
                                 ) : (
                                     <img
                                         src={nouserimage}
                                         alt="Foto de perfil por defecto"
-                                        className="avatar-image"
+                                        className="profile-picture-small"
                                     />
                                 )}
                             </div>
@@ -196,5 +190,5 @@ export const Navbar = ({ toggleSidebar, isOpen }) => {
                 </div>
             </div>
         </header>
-    )
-}
+    );
+};

@@ -1,6 +1,6 @@
 export const InputField = ({ label, type, value, onChange, name, error }) =>
 (
-    <div className="input-box">
+    <div className="input-box mt-1">
         <label>{label}</label>
         <input
             type={type}

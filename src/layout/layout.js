@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import "../styles/main.css";
+import "../styles/global.css";
 import "../styles/global.responsive.css";
 import { Sidebar } from "../components/sidebar";
 import { Navbar } from "../components/navbar";

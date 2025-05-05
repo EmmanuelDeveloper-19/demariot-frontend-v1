@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { Usuarios } from '../context/UserContext';
 
-export const useUsers = () => {
-    const { getUsers, currentUser } = useAuth();
+export const useUsersHoook = () => {
+    const { getUsers, currentUser} = Usuarios();
     const [users, setUsers] = useState([]);
 
     useEffect(() => {

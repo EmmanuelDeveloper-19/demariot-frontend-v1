@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demariot - Iniciar Sesión</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #002244;
+      --primary-dark: #001a33;
+      --text-primary: #ffffff;
+      --text-blue: #1e90ff;
+      --text-green: #2ecc71;
+      --error: #e74c3c;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      background-color: var(--primary-dark);
+    }
+
+    .login-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .row {
+      display: flex;
+      width: 100%;
+    }
+
+    .row-reverse {
+      flex-direction: row-reverse;
+    }
+
+    .col-md-6 {
+      width: 50%;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bg-color {
+      background-color: #f8f8f8;
+    }
+
+    .bg-primary-dark {
+      background-color: var(--primary-dark);
+      color: var(--text-primary);
+      flex-direction: column;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .text-subtitle {
+      font-size: 1.5rem;
+    }
+
+    .text-title {
+      font-size: 2rem;
+      margin-top: 1rem;
+    }
+
+    .text-primary {
+      color: var(--primary);
+    }
+
+    .text-blue {
+      color: var(--text-blue);
+    }
+
+    .text-green {
+      color: var(--text-green);
+    }
+
+    .texto-base {
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .input-icon-container {
+      position: relative;
+    }
+
+    .input-icon-container input {
+      width: 100%;
+      padding: 0.75rem 2.5rem 0.75rem 2rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .input-icon-container .icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #777;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .error-message {
+      color: var(--error);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .logo-big {
+      width: 60%;
+      max-width: 300px;
+    }
+
+    .hide-mobile {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .col-md-6 {
+        width: 100%;
+      }
+      .row-reverse {
+        flex-direction: column;
+      }
+      .hide-mobile {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="row row-reverse">
+      <div class="col-md-6 bg-color">
+        <div class="form-container">
+          <h1 class="text-subtitle text-primary">Demariot</h1>
+          <h1 class="text-title text-primary">Iniciar Sesión</h1>
+          <p class="texto-base text-primary hide-mobile">Bienvenido de nuevo!, ingresa tus credenciales para acceder a la aplicación.</p>
+
+          <form>
+            <div class="form-group">
+              <label>Correo electrónico:</label>
+              <div class="input-icon-container">
+                <i class="fas fa-envelope icon"></i>
+                <input type="email" placeholder="Introduce tu correo electrónico" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Contraseña:</label>
+              <div class="input-icon-container">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" placeholder="Ingresa tu contraseña" required />
+                <i class="fas fa-eye toggle-password"></i>
+              </div>
+            </div>
+
+            <p class="btn error-message" style="display: none;">Error de ejemplo</p>
+
+            <br />
+            <button class="btn btn-primary">Iniciar sesión</button>
+
+            <div class="row">
+              <p class="text-primary">¿Olvidaste tu contraseña?</p>
+              <a class="text-blue" href="/reset-password">Recuperar contraseña</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-6 bg-primary-dark">
+        <img src="logo.png" alt="Logo" class="logo-big" />
+        <p class="text-green text-title hide-mobile">Desarrollo de software empresarial a la medida</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

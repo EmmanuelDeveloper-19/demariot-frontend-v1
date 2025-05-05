@@ -20,3 +20,4 @@ export const usePagination = (data = [], itemsPerPage = 10) => {
 
     return { currentData, currentPage, maxPage, next, prev, jump };
 };
+

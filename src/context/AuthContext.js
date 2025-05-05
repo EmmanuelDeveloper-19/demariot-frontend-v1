@@ -21,9 +21,6 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-
-
-
     const login = async (email, password) => {
         try {
             const response = await axios.post(`${API_BASE_URL}/login`, { email, password });
@@ -35,7 +32,10 @@ export const AuthProvider = ({ children }) => {
             return { success: true, user };
         }
         catch (error) {
-            console.log("Error al loggear", error);
+            return {
+                success: false,
+                error: "Error al conectar con el servidor"
+            };
         }
     };
 
@@ -112,208 +112,28 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const recoveryPassword = async(email) =>{
-        try{
-            const response = await axios.post(`${API_BASE_URL}/recovery-password`, {email});
-            return {success:true}
-        } catch (error){
-            console.log("Error! lol");
-        }
-    }
-
-
-    // Crear usuario
-    const createUser = async (userData) => {
+    const recoveryPassword = async (email) => {
         try {
-            const token = localStorage.getItem("token");
-            const response = await axios.post(`${API_BASE_URL}/create-user`, userData, {
-                headers:
-                {
-                    "Authorization": `Bearer ${token}`,
-                },
-            });
-            return { success: true, user: response.userData };
-        }
-        catch (error) {
-            return { success: false, error };
-        }
-
-    };
-
-    const crearMensaje = async (formData) => {
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.post(`${API_BASE_URL}/crear-mensaje`, formData, {
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data",
-                },
-            });
-    
-            return {
-                success: true,
-                data: response.data.data,
-            };
+            const response = await axios.post(`${API_BASE_URL}/recovery-password`, { email });
+            return { success: true }
         } catch (error) {
             return {
                 success: false,
-                error: error.response?.data?.message || error.message,
+                error: error.response?.data?.message ||
+                    error.message ||
+                    "Error al conectar con el servidor"
             };
-        }
-    };
-
-    const marcarComoLeido = async (mensajeId) => {
-        try {
-            const token = localStorage.getItem("token");
-            await axios.patch(`${API_BASE_URL}/mensajes/visto/${mensajeId}`, null, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            return { success: true };
-        } catch (error) {
-            return {
-                success: false,
-                error: error.response?.data?.message || error.message,
-            };
-        }
-    };
-    
-    
-
-
-    const obtenerMensajes = async (idUsuario) => {
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.get(`${API_BASE_URL}/mensajes/${idUsuario}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            return { success: true, mensajes: response.data.mensajes };
-        } catch (error) {
-            return { success: false, error };
-        }
-    };
-
-
-    // Crear múltiples usuarios
-    const createMultipleUsers = async (userData) => {
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.post(`${API_BASE_URL}/create-users`, userData,
-                {
-                    headers:
-                    {
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    },
-                }
-            );
-            return { success: true, users: response.data.users };
-        }
-        catch (error) {
-            console.error("Error al crear múltiples usuarios", error);
-            return { success: false, error };
-        }
-    }
-
-    // Listar usuarios
-    const getUsers = async () => {
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.get(`${API_BASE_URL}/get-users`, {
-                headers:
-                {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-            return { success: true, users: response.data.users };
-        }
-        catch (error) {
-            return { success: false, error };
-        }
-    }
-
-    // Obtener usuario por id
-    const getUserById = async (userId) => {
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.get(`${API_BASE_URL}/get-user/${userId}`, {
-                headers:
-                {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-            return { success: true, user: response.data.user };
-        }
-        catch (error) {
-            return { succes: false, error }
-        }
-    }
-
-    // Editar el rol del usuario
-    const updateUserRol = async (userId, role) => {
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.put(`${API_BASE_URL}/update-user/${userId}`, { role }, {
-                headers:
-                {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-    
-            // Solo actualiza currentUser si es el mismo usuario
-            const updatedUser = response.data.user;
-    
-            // Verifica si el usuario actualizado es el actual usuario logueado
-            if (updatedUser._id === currentUser._id) {
-                localStorage.setItem("user", JSON.stringify(updatedUser));
-                setCurrentUser(updatedUser);
-            }
-    
-            return { success: true, user: updatedUser };
-        }
-        catch (error) {
-            return { success: false, error };
-        }
-    }
-    
-
-    // Eliminar usuario
-    const deleteUser = async (userId) => {
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.delete(`${API_BASE_URL}/delete-users/${userId}`, {
-                headers:
-                {
-                    "Authorization": `Bearer ${token}`,
-                },
-            });
-            return { success: true, message: response.data.message };
-        }
-        catch (error) {
-            return { succes: false, error };
         }
     }
 
     const value = {
         currentUser,
-        crearMensaje,
-        obtenerMensajes,
-        marcarComoLeido,
         setCurrentUser,
         login,
         logout,
         updateUser,
         changePassword,
         recoveryPassword,
-        createUser,
-        createMultipleUsers,
-        getUsers,
-        getUserById,
-        updateUserRol,
-        deleteUser,
         isAuthenticated: !!currentUser
     }
 
