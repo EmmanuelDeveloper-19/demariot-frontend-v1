@@ -21,7 +21,6 @@ export const ProfileInfo = () => {
     street: currentUser?.address?.street || "",
     state: currentUser?.address?.state || "",
     zip: currentUser?.address?.zip || "",
-    profilePicture: null,
     preview: currentUser?.profile_picture
       ? `${API_BASE_URL}${currentUser.profile_picture}`
       : null,
@@ -46,14 +45,15 @@ export const ProfileInfo = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [hasChanges, setHasChanges] = useState(false);
 
-  // Verifica si hay cambios en los datos
   useEffect(() => {
     const checkForChanges = () => {
-      // Compara los valores actuales con los iniciales
+
       const hasFormChanges =
         firstName !== initialValues.firstName ||
         lastname !== initialValues.lastname ||
@@ -249,30 +249,31 @@ export const ProfileInfo = () => {
           <div className="column">
             <div className="input-box mt-1">
               <label>contraseña actual: </label>
-              <div className="input-icon-container">
+              <div className="input-icon">
                 <input
                   id="currentPassword"
                   name="current_password"
-                  type={showPassword ? "text" : "password"}
+                  type={showCurrentPassword ? "text" : "password"}
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="Ingresa tu contraseña actual"
                 />
                 <i
-                  className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"} toggle-password`}
-                  onClick={() => setShowPassword(!showPassword)}
+                  className={`fas ${showCurrentPassword ? "fa-eye-slash" : "fa-eye"} toggle-password`}
+                  onClick={() => setShowPassword(!showCurrentPassword)}
                 />
               </div>
             </div>
             <div className="input-box">
               {/*Vacio porque no supe como alinearlo (NO BORRAR)*/}
+              
             </div>
           </div>
 
           <div className="column">
             <div className="input-box mt-1">
               <label>Nueva contraseña: </label>
-              <div className="input-icon-container">
+              <div className="input-icon">
                 <input
                   id="newPassword"
                   name="new_password"
@@ -295,7 +296,7 @@ export const ProfileInfo = () => {
           <div className="column">
             <div className="input-box mt-1">
               <label>Confirmar contraseña: </label>
-              <div className="input-icon-container">
+              <div className="input-icon">
                 <input
                   id="confirmPassword"
                   name="confirm_password"

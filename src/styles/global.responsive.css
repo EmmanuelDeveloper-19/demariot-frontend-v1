@@ -40,6 +40,7 @@
     /*==== SIDEBAR START ==== */
     .sidebar {
         width: 0;
+        z-index: 100;
     }
 
     .sidebar .sidebar-content .nav-group .nav-list li a {
@@ -71,6 +72,7 @@
 
     .only-mobile {
         display: flex;
+        color: white;
     }
 
     /*==== SIDEBAR FINAL ==== */

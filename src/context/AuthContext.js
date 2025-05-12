@@ -124,7 +124,17 @@ export const AuthProvider = ({ children }) => {
                     "Error al conectar con el servidor"
             };
         }
-    }
+    };
+
+    const getProfilePictureUrl = async (userId) => {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/users/${userId}/photo`);
+            return { success: true, user:response.data };
+        } catch(error){
+            console.log("Error")
+        }
+    };
+    
 
     const value = {
         currentUser,
@@ -134,6 +144,7 @@ export const AuthProvider = ({ children }) => {
         updateUser,
         changePassword,
         recoveryPassword,
+        getProfilePictureUrl,
         isAuthenticated: !!currentUser
     }
 

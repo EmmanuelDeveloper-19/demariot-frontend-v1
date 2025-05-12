@@ -25,7 +25,7 @@ export const PhData = () => {
     return (
         <>
             <div className="d-flex flex-column justify-content-center align-items-start">
-            <p className="text-title text-gray">Nivel de ph: </p>
+            <p className="text-subtitle text-primary">Ph </p>
             {
                 ultimo && (
                     <p className="text-title text-bold text-primary">{ultimo.values}</p>

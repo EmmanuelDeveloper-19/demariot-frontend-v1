@@ -1,44 +1,60 @@
 import React, { useState } from 'react';
-import { CadmioTab } from './cadmioTab';
-import { MercurioTab } from './mercurioTab';
+import { PhTable } from './phTable';
+import { TurbityTable } from './turbityTable';
+import { TempTable } from './tempTable';
+import { HumidityTable } from './humidityTable';
+import { ColorimetryTable } from './colorimetryTable';
 
 export const Historial = () => {
   const [activeTab, setActiveTab] = useState('tab1');
 
   return (
     <>
-      <h1 className='text-title text-primary'>Historial de datos</h1>
-      <p className='text-base text-primary'>En esta sección se recopilan todos los datos analizados por el prototipo.</p>
+      <h1 className='text-subtitle text-primary'>Historial de datos</h1>
+      <p className='text-body text-primary'>En esta sección se recopilan todos los datos analizados por el prototipo.</p>
 
       <div className="tab-buttons mt-1">
         <button onClick={() => setActiveTab('tab1')} className={activeTab === 'tab1' ? 'active' : ''}>
-          Cadmio
+          Ph
         </button>
         <button onClick={() => setActiveTab('tab2')} className={activeTab === 'tab2' ? 'active' : ''}>
-          Mercurio
+          Turbidez
         </button>
         <button onClick={() => setActiveTab('tab3')} className={activeTab === 'tab3' ? 'active' : ''}>
-          Plomo
+          Temperatura
+        </button>
+        <button onClick={() => setActiveTab('tab4')} className={activeTab === 'tab4' ? 'active' : ''}>
+          Humedad
+        </button>
+        <button onClick={() => setActiveTab('tab5')} className={activeTab === 'tab5' ? 'active' : ''}>
+          Colorimetría
         </button>
       </div>
 
       <div className="tab-content">
         {activeTab === 'tab1' && (
           <div>
-            <h3>Cadmio</h3>
-            <CadmioTab/>
+            <PhTable/>
           </div>
         )}
         {activeTab === 'tab2' && (
           <div>
-            <h3>Datos del mercurio</h3>
-            <MercurioTab/>
+            <TurbityTable/>
           </div>
         )}
         {activeTab === 'tab3' && (
           <div>
-            <h3>Actividad reciente</h3>
-            {/* Aquí va la tabla de actividad */}
+            <TempTable/>
+          </div>
+        )}
+        {activeTab === 'tab4' && (
+          <div>
+            <HumidityTable/>
+          </div>
+        )}
+        {activeTab === 'tab5' && (
+          <div>
+            <ColorimetryTable/>
           </div>
         )}
       </div>

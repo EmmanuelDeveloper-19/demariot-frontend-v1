@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { LocationData } from '../../components/sensors/locationData';
 
 
 // Configuración inicial del mapa
@@ -13,41 +14,41 @@ const MAP_STYLE = { height: '600px', width: '100%', borderRadius: '10px' };
 const HeatmapLayer = ({ data }) => {
     const map = useMap();
     const layerRef = useRef(null);
-  
+
     useEffect(() => {
-      if (!data.length) return;
-  
-      if (!layerRef.current) {
-        layerRef.current = L.layerGroup().addTo(map);
-      } else {
-        layerRef.current.clearLayers();
-      }
-  
-      data.forEach(point => {
-        L.circle([point.lat, point.lng], {
-          radius: point.level * 2,
-          fillColor: getColorByLevel(point.level),
-          color: 'transparent',
-          fillOpacity: 0.6,
-          weight: 0
-        }).addTo(layerRef.current);
-      });
-  
-      return () => {
-        if (layerRef.current) {
-          layerRef.current.remove();
+        if (!data.length) return;
+
+        if (!layerRef.current) {
+            layerRef.current = L.layerGroup().addTo(map);
+        } else {
+            layerRef.current.clearLayers();
         }
-      };
+
+        data.forEach(point => {
+            L.circle([point.lat, point.lng], {
+                radius: point.level * 2,
+                fillColor: getColorByLevel(point.level),
+                color: 'transparent',
+                fillOpacity: 0.6,
+                weight: 0
+            }).addTo(layerRef.current);
+        });
+
+        return () => {
+            if (layerRef.current) {
+                layerRef.current.remove();
+            }
+        };
     }, [data, map]);
-  
+
     return null;
-  };
-  
-  const getColorByLevel = (level) => {
+};
+
+const getColorByLevel = (level) => {
     if (level > 70) return '#ff0000';
     if (level > 40) return '#ffa500';
     return '#ffff00';
-  };
+};
 
 // Simulación de datos (serán reemplazados por API)
 const usePollutionData = () => {
@@ -129,8 +130,19 @@ export const MapaContaminacion = () => {
     const mapRef = useRef();
 
     return (
-        <div style={{ position: 'relative', width: '100%' }}>
-            <MapContainer
+        <div className='container'>
+            <div className='row'>
+                <div className='col-md-12'>
+                            <h2 className="text-title text-primary">Último análisis</h2>
+                            <LocationData />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+{/* 
+     <MapContainer
                 center={MAP_CENTER}
                 zoom={ZOOM_LEVEL}
                 style={MAP_STYLE}
@@ -141,7 +153,6 @@ export const MapaContaminacion = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
 
-                {/* Representación del río */}
                 <GeoJSON
                     data={{
                         type: "Feature",
@@ -163,14 +174,11 @@ export const MapaContaminacion = () => {
                     }}
                 />
 
-                {/* Capa de calor */}
                 {!loading && <HeatmapLayer data={data} />}
 
-                {/* Marcadores de contaminación */}
                 {!loading && <PollutionMarkers data={data} />}
             </MapContainer>
 
-            {/* Leyenda del mapa */}
             <div style={{
                 position: 'absolute',
                 bottom: '20px',
@@ -224,7 +232,6 @@ export const MapaContaminacion = () => {
                 </div>
             </div>
 
-            {/* Estado de carga */}
             {loading && (
                 <div style={{
                     position: 'absolute',
@@ -240,7 +247,4 @@ export const MapaContaminacion = () => {
                 }}>
                     <div>Cargando datos de contaminación...</div>
                 </div>
-            )}
-        </div>
-    );
-};
+            )}*/}

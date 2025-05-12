@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getTurbidezSensorData } from "../../services/sensores";
 
 export const TurbidezData = () => {
@@ -9,7 +9,7 @@ export const TurbidezData = () => {
             try {
                 const response = await getTurbidezSensorData();
                 if (response.success) {
-                    setTurbidezData(response.data.turbidezSensor);
+                    setTurbidezData(response.data.turbitySensor);
                 } else {
                     console.error("Error");
                 }
@@ -20,11 +20,10 @@ export const TurbidezData = () => {
         obtenerDatos();
     }, []);
 
-    const ultimo = Array.isArray(turbidezData) ? turbidezData.at(-1) : null;
-
+    const ultimo = turbidezData.at(-1);
     return (
         <div className="d-flex flex-column justify-content-center align-items-start">
-            <p className="text-title text-gray">Nivel de turbidez</p>
+            <p className="text-subtitle text-primary">Turbidez</p>
             {ultimo && (
                 <p className="text-title text-primary text-bold">{ultimo.values}</p>
             )}

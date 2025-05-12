@@ -79,7 +79,7 @@ export const UserCreate = () => {
                     </div>
                     <div className="column">
                         <InputField label="Correo electrónico" type="email" name="email" value={userData.email} onChange={handleChange("email")} />
-                        <InputField label="Teléfono" type="number" name="phone" value={userData.phone} onChange={handleChange("phone")} error={errors.phone} />
+                        <InputField label="Teléfono" type="number" name="phone" value={userData.phone} onChange={handleChange("phone")} error={errors.phone} maxLength={10}/>
                     </div>
 
                     <h3 className="text-title text-primary mt-1">Dirección</h3>

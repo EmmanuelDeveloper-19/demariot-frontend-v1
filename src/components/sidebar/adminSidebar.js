@@ -32,21 +32,21 @@ export const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                             <li title="Ver mapa en tiempo real">
                                 <Link to="maps">
                                     <i className="fas fa-map"></i>
-                                    <p>Mapa en tiempo real</p>
+                                    <p>Mapa de contaminación</p>
                                 </Link>
                             </li>
 
                             <li title="Ver predicciones">
                                 <Link to="predicciones">
                                     <i className="fas fa-area-chart" />
-                                    <p>Predicciones</p>
+                                    <p>Datos de los metales</p>
                                 </Link>
                             </li>
 
                             <li title="Ver el historial ">
                                 <Link to="historial">
                                     <i className="fas fa-history" />
-                                    <p>Historial</p>
+                                    <p>Datos de los sensores</p>
                                 </Link>
                             </li>
 
