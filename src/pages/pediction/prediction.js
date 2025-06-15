@@ -14,7 +14,7 @@ const COLORS = {
 };
 
 export const Prediction = () => {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const obtenerDatos = async () => {
@@ -60,17 +60,19 @@ export const Prediction = () => {
   }));
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2 style={{ color: "#2c3e50" }}>Dashboard de Concentración de Metales</h2>
+    <div>
+      <div className="row mb-1">
+        <h1 className="text-subtitle text-primary">Concentración de metales pesados</h1>
+      </div>
 
-      <div className="cards" style={{ display: "flex", gap: "20px", flexWrap: "wrap", marginBottom: "40px" }}>
+      <div className="row" style={{ display: "flex", gap: "20px", flexWrap: "wrap", marginBottom: "40px" }}>
         {["plomo", "cadmio", "aluminio"].map(metal => {
           const total = groupedData[metal].reduce((acc, e) => acc + e.metals.concentration_mgL, 0);
           return (
-            <div key={metal} style={{
-              background: "#ecf0f1",
+            <div 
+              className="card"
+              key={metal} style={{
               padding: "20px",
-              borderRadius: "10px",
               minWidth: "250px",
               flex: 1,
               boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
@@ -85,8 +87,8 @@ export const Prediction = () => {
       </div>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: "30px", marginBottom: "50px" }}>
-        <div style={{ flex: 1, minWidth: "300px", height: "300px" }}>
-          <h4>Distribución por tipo de metal</h4>
+        <div className="card" style={{ flex: 1, minWidth: "300px", height: "300px" }}>
+          <h1 className="text-subtitle text-primary">Distribución por tipo de metal</h1>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -106,8 +108,8 @@ export const Prediction = () => {
           </ResponsiveContainer>
         </div>
 
-        <div style={{ flex: 1, minWidth: "300px", height: "300px" }}>
-          <h4>Concentración total por metal (mg/L)</h4>
+        <div className="card" style={{ flex: 1, minWidth: "300px", height: "300px" }}>
+          <h1 className="text-primary text-subtitle">Concentración total por metal (mg/L)</h1>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={barData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -121,8 +123,8 @@ export const Prediction = () => {
         </div>
       </div>
 
-      <div style={{ height: "300px" }}>
-        <h4>Evolución temporal de concentraciones</h4>
+      <div className="card" style={{ height: "300px" }}>
+        <h1 className="text-subtitle text-primary">Evolución temporal de concentraciones</h1>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={lineData}>
             <CartesianGrid strokeDasharray="3 3" />

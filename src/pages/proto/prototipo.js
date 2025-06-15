@@ -1,4 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
+import { Modal } from "../../components/Modal";
+
+export const Prototype = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleMuestra = () => {
+    setShowModal(true);
+  }
+  return (
+    <div className="container">
+      <h1 className="text-subtitle text-primary">Gestión del prototipo </h1>
+      <div className="row">
+        <div className="col-md-6">
+          <h1 className="text-subtitle text-primary">Estatus del prototipo</h1>
+          <div className="row mt-1">
+            <p className="text-primary">Estado: </p>
+            <span className="btn btn-outline-primary">Encendido</span>
+          </div>
+          <div className="row mt-1">
+            <p className="text-primary">Nivel de bateria: </p>
+            <span className="text-primary text-bold">50 %</span>
+          </div>
+          <div className="row mt-1">
+            <p className="text-primary">Ubicación : <span>1233°</span></p>
+            <span className="btn btn-outline-primary">Ver ubicación</span>
+          </div>
+        </div>
+
+        <div className="col-md-6">
+          <h1 className="text-primary text-subtitle">Acciones</h1>
+          <div className="row">
+            <button className="btn btn-primary">Encender prototipo</button>
+          </div>
+          <div className="row mt-1">
+            <button className="btn btn-primary" onClick={() => handleMuestra()}>Recoger muestra</button>
+          </div>
+        </div>
+      </div>
+      <div className="row mt-1">
+        <div className="table-container mt-1">
+          <table className="content-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre del sensor</th>
+                <th>Valores</th>
+                <th>Fecha de recopilación</th>
+                <th>Coordenadas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <Modal
+        isOpen={showModal}
+        title="Muestra"
+        message={
+          <div className="flex-column">
+            <p>Datos del analisis</p>
+            <div className="input-box">
+              <label>Color arrojado: </label>
+              <input placeholder="Ingrese el color en rgba"/>
+            </div>
+          </div>
+        }
+        onCancel={() => setShowModal(false)}
+      />
+    </div>
+  )
+}
+/* 
 
 export const Prototype = () => {
 
@@ -26,16 +103,16 @@ export const Prototype = () => {
     const signalClass = prototype.network.signal_strength > 70 ? 'strong' : prototype.network.signal_strength > 40 ? 'moderate' : 'weak';
   
     return (
-      <div className="prototype-container">
-        <h1>Gestión del Prototipo IoT</h1>
+      <div className="container">
+        <h1 className="text-primary text-subtitle">Gestión del Prototipo IoT</h1>
   
         <section className="info-grid">
-          <div>
-            <h3>ID del prototipo</h3>
-            <p>{prototype.id_prototype}</p>
+          <div className="card bg-primary">
+            <p className="text-primary text-body text-bold">ID del prototipo</p>
+            <p className="text-primary text-body">{prototype.id_prototype}</p>
           </div>
           <div>
-            <h3>Estado</h3>
+            <h1>Estado</h1>
             <span className={`status-badge ${prototype.status.toLowerCase()}`}>
               {prototype.status}
             </span>
@@ -82,4 +159,4 @@ export const Prototype = () => {
         </section>
       </div>
     );
-  };
+  };*/

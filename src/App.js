@@ -20,6 +20,7 @@ import { UserLayout } from "./layout/userLayout";
 import { ProtectedUserRoute } from "./services/protectedRoutes/ProtectedUserRoute";
 import { ProtectedAdminRoute } from "./services/protectedRoutes/ProtectedAdminRoute";
 import { Error404 } from "./pages/error/404";
+import { Prototype1 } from "./pages/proto/prototype";
 import "./styles/global.css";
 import "./styles/global.responsive.css";
 
@@ -52,6 +53,7 @@ export function App() {
           <Route path="alertHistorial" element={<HistorialAlertas />} />
           <Route path="maps" element={<MapaContaminacion />} />
           <Route path="mensajes" element={<MapaContaminacion />} />
+          <Route path="prototype" element={<Prototype1/>}/>
         </Route>
 
         {/* Admin Routes */}
@@ -75,6 +77,8 @@ export function App() {
           <Route path="agregarUsuario" element={<UserCreate />} />
           <Route path="usuarioInfo/:id" element={<UserDetail />} />
           <Route path="log" element={<Logs />} />
+          <Route path="prototype" element={<Prototype1/>}/>
+
         </Route>
       </Routes>
     </BrowserRouter>

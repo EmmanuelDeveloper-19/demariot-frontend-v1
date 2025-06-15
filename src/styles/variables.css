@@ -53,8 +53,8 @@
   
     /* === SOMBRAS Y BORDES === */
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --radius-element: 0;
-    --radius-content: 0;
+    --radius-element: 33px;
+    --radius-content: 12px;
   }
   
   /* === TEMA OSCURO === */

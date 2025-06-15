@@ -122,6 +122,11 @@ body {
     color: var(--success);
 }
 
+/* Align */
+.text-start {
+    text-align: start;
+}
+
 /* ==== TEXT STYLES FINAL ===== */
 
 /* ==== ALERTS STYLES FINAL ===== */
@@ -217,7 +222,7 @@ body {
 /* ==== CONTAINERS START ===== */
 .container {
     background: var(--content-bg);
-    border-radius: 8px;
+    border-radius: var(--radius-content);
     box-shadow: var(--shadow);
     padding: 20px;
     margin: 0 auto;
@@ -304,6 +309,10 @@ body {
 
 .align-items-stretch {
     align-items: stretch;
+}
+
+.justify-content-start {
+    justify-content: start;
 }
 
 .justify-content-end {
@@ -394,6 +403,7 @@ body {
 
 .btn:disabled {
     cursor: not-allowed;
+    opacity: 0.8;
 }
 
 .btn-icon {
@@ -442,13 +452,13 @@ body {
 }
 
 .btn-secondary {
-    background: var(--secondary);
-    color: var(--text-white);
+    background: var(--gray-dark);
+    color: var(--white);
 }
 
 .btn-secondary:hover {
-    background: var(--secondary);
-    color: white;
+    background: var(--gray);
+    color: var(--gray-dark);
 }
 
 .btn-success {

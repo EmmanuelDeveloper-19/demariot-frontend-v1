@@ -21,27 +21,7 @@ export const Navbar = ({ toggleSidebar, isOpen }) => {
 
     // Datos estáticos de mensajes
     const mensajes = [
-        {
-            _id: "1",
-            nombre_emisor: "Juan Pérez",
-            contenido: "Hola, ¿cómo estás?",
-            createdAt: new Date(),
-            leido: false
-        },
-        {
-            _id: "2",
-            nombre_emisor: "María García",
-            contenido: "Reunión a las 3pm",
-            createdAt: new Date(Date.now() - 3600000),
-            leido: true
-        },
-        {
-            _id: "3",
-            nombre_emisor: "Carlos López",
-            contenido: "Documentos aprobados",
-            createdAt: new Date(Date.now() - 86400000),
-            leido: false
-        }
+      
     ];
 
     const handleLogout = async () => {

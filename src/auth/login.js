@@ -23,7 +23,6 @@ export const Login = () => {
             if (response?.success) {
                 setMessage("Inicio de sesión exitoso");
 
-                // Redirigir después de 1.2 segundos
                 setTimeout(() => {
                     const redirectPath = roleRedirects[response.user.role];
                     navigate(redirectPath);
@@ -37,6 +36,61 @@ export const Login = () => {
     };
 
     return (
+        <div className="login-content">
+            <div className="content-left">
+                <h1 className="text-subtitle text-light">Iniciar Sesión</h1>
+
+                <form className="form" onSubmit={handleLogin}>
+                                    {error && <p className="alert alert-danger">{error}</p>}
+                {message && <p className="alert alert-success">{message}</p>}
+                    <div className="form-group">
+                        <label>Correo electrónico: </label>
+                        <div className="input-icon-container">
+                            <i className="fas fa-envelope icon" />
+                            <input
+                                type="email"
+                                value={email}
+                                required
+                                placeholder="Introduce tu correo electrónico"
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={error ? "input-error" : ""} />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label>Contraseña: </label>
+                        <div className="input-icon-container">
+                            <i className="fas fa-lock icon" />
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                placeholder="Ingresa tu contraseña"
+                                required
+                                onChange={(e) => setPassword(e.target.value)}
+                                className={error ? "input-error" : ""}
+                            />
+                            <i
+                                className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"} toggle-password`}
+                                onClick={() => setShowPassword(!showPassword)}
+                            />
+                        </div>
+                    </div>
+                    <div className="row justify-content-end gap">
+                        <Link className="link" to="/reset-password">¿Olvidaste tu contraseña?</Link>
+                    </div>
+                    <br />
+                    <button className="btn btn-primary">
+                        Iniciar sesión
+                    </button>
+                </form>
+            </div>
+            <div className="content-right">
+                <img className="logo" src={logo}></img>
+            </div>
+        </div>
+    );
+};
+
+/*
         <div className="login-container">
             <div className="login-card">
                 <h1 className="text-subtitle text-light">Iniciar Sesión</h1>
@@ -85,8 +139,7 @@ export const Login = () => {
                 </form>
             </div>
         </div>
-    );
-};
+*/
 
 
 /*

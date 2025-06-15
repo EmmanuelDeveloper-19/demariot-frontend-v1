@@ -322,7 +322,7 @@ export const ProfileInfo = () => {
             </div>
           </div>
 
-          <div className="column">
+          <div className="column mt-1">
             <div className="input-box">
               <div className="row gap">
                 <button className="btn btn-secondary mt-1" type="button" onClick={resetForm}>
