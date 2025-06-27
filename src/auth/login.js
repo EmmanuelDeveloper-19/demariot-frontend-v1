@@ -38,11 +38,12 @@ export const Login = () => {
     return (
         <div className="login-content">
             <div className="content-left">
-                <h1 className="text-subtitle text-light">Iniciar Sesión</h1>
 
                 <form className="form" onSubmit={handleLogin}>
-                                    {error && <p className="alert alert-danger">{error}</p>}
-                {message && <p className="alert alert-success">{message}</p>}
+                    <h1 className="text-primary">Iniciar Sesión</h1>
+
+                    {error && <p className="alert alert-danger">{error}</p>}
+                    {message && <p className="alert alert-success">{message}</p>}
                     <div className="form-group">
                         <label>Correo electrónico: </label>
                         <div className="input-icon-container">
@@ -84,7 +85,7 @@ export const Login = () => {
                 </form>
             </div>
             <div className="content-right">
-                <img className="logo" src={logo}></img>
+                <img className="logo" src={logo}  loading="lazy"></img>
             </div>
         </div>
     );

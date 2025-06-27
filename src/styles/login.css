@@ -37,9 +37,8 @@
     font-weight: lighter;
     padding: 0.75rem 2.5rem 0.75rem 2.5rem;
     margin-bottom: 0;
-    background: none;
-    border: none;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid black;
+    border-radius: var(--radius-content);
 }
 
 .input-icon-container input:focus {
@@ -66,7 +65,8 @@
 }
 
 .input-error {
-    border-bottom: 1px solid var(--danger)!important;
+    border: 1px solid var(--danger)!important;
+    color: var(--danger);
 }
 
 
@@ -87,6 +87,11 @@
     justify-content: center;
     align-items: center;
 }
+
+.content-left h1 {
+    text-align: left;
+    margin-bottom: 1rem;
+}
 .content-left form {
     width: 500px;
 }
@@ -97,6 +102,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: var(--primary-dark);
 }
 
 .content-right .logo {

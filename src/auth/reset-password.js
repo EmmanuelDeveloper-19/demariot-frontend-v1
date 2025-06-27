@@ -33,12 +33,13 @@ export const ResetPassword = () => {
 
 
     return (
-        <div className="login-container">
-            <div className="login-card">
-                <h2 className="text-subtitle text-light text-primary-dark mb-1">Recuperar contraseña</h2>
-                <p className="text-body text-primary-dark mb-1">Si olvidaste tu contraseña, ingresa tu correo electrónico para generar una nueva contraseña, procura actualizarla lo antes posible.</p>
-                {error && <span className="alert alert-danger">{error}</span>}
+        <div className="login-content">
+            <div className="content-left">
+
                 <form className="form" onSubmit={handleResetPassword}>
+                    <h2 className="text-subtitle text-light text-primary-dark mb-1">Recuperar contraseña</h2>
+                    <p className="text-body text-primary-dark mb-1">Si olvidaste tu contraseña, ingresa tu correo electrónico para generar una nueva contraseña, procura actualizarla lo antes posible.</p>
+                    {error && <span className="alert alert-danger">{error}</span>}
                     <div className="form-group">
                         <label>Correo</label>
                         <div className="input-icon-container">
@@ -68,6 +69,9 @@ export const ResetPassword = () => {
                     </button>
                 </form>
             </div>
+            <div className="content-right">
+                <img className="logo" src={logo} loading="lazy"></img>
+            </div>
         </div>
     )
 }
@@ -81,16 +85,22 @@ export const Mensaje = () => {
 
     }
     return (
-        <div className="login-container">
-            <div className="login-card">
-                <h1 className="text-subtitle text-light text-primary-dark mb-1">Revisa tu correo electrónico</h1>
-                <p className="text-body text-primary-dark mb-1">
-                    Te hemos enviado una nueva contraseña a tu correo. Asegúrate de cambiarla por una personalizada lo antes posible para mantener tu cuenta segura.
-                </p>
+        <div className="login-content">
+            <div className="content-left">
+                <form className="form">
+                    <h1 className="text-subtitle text-light text-primary-dark mb-1">Revisa tu correo electrónico</h1>
+                    <p className="text-body text-primary-dark mb-1">
+                        Te hemos enviado una nueva contraseña a tu correo. Asegúrate de cambiarla por una personalizada lo antes posible para mantener tu cuenta segura.
+                    </p>
 
-                <button onClick={returnLogin} className="btn btn-primary mt-1">
-                    Volver al Inicio de Sesión
-                </button>
+                    <button onClick={returnLogin} className="btn btn-primary mt-1">
+                        Volver al Inicio de Sesión
+                    </button>
+                </form>
+
+            </div>
+            <div className="content-right">
+                <img className="logo" src={logo} loading="lazy"></img>
             </div>
         </div>
 

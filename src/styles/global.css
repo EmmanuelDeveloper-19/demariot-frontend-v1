@@ -8,10 +8,27 @@
     pointer-events: auto !important;
 }
 
+html {
+    font-size: 16px;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-base);
+    line-height: var(--line-height);
     background: var(--background);
 }
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+p {
+    font-size: 1rem;
+}
+
+
 
 /* ==== BG STYLES START ===== */
 .bg-base {
@@ -65,11 +82,11 @@ body {
 }
 
 .text-title {
-    font-size: 1.87rem;
+    font-size: 1.5rem;
 }
 
 .text-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .text-heading {
@@ -535,6 +552,43 @@ body {
 .card-header {
     margin-bottom: 1rem;
     text-align: start;
+}
+
+.card-small {
+    border-radius: var(--radius-content);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.card-small:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-small .card-icon {
+    padding: 12px;
+    border-radius: 50%;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.card-small .card-content .card-title {
+    font-weight: 500;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.card-small .card-content .card-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 4px 0 0 0;
 }
 
 /* ==== CARDS STYLE FINAL =========*/

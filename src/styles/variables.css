@@ -53,12 +53,21 @@
   
     /* === SOMBRAS Y BORDES === */
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --radius-element: 33px;
+    --radius-element: 12px;
     --radius-content: 12px;
+
+    /* === Tamaños de texto === */
+    --font-base: 1rem;
+    --font-scale: 1.25rem;
+    --line-height: 1.5;
+    /* === Tamaños de texto === */
+
   }
   
   /* === TEMA OSCURO === */
   [data-theme="dark"] {
+    --primary-dark: #002244;
+
     --background: #0d1b2a;
     --content-bg: #1b2b3a;
     --white: #ffffff;

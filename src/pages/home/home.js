@@ -7,6 +7,7 @@ import { LocationData } from "../../components/sensors/locationData";
 import { WeatherQuality } from "../../components/sensors/weatherCuality";
 import { Prototype } from "../../components/prototype/prototype";
 import { PredictionChart } from "../../components/charts/prediction";
+import { StatsCards } from "../../components/startsCards";
 
 export const Home = () => {
     const { currentUser } = useAuth();
@@ -14,32 +15,13 @@ export const Home = () => {
     return (
         <div className="container-fluid">
             <div className="dashboard-header mb-4">
-                <h1 className="text-title text-primary">Hola! {currentUser.first_name}</h1>
-                <p className="text-base text-primary">Bienvenido. (Los datos en tiempo real se muestran si el prototipo esta ensendido, si no se muestra la última actualización).</p>
+                <h1 className="text-primary">Hola! {currentUser.first_name}</h1>
+                <p className="text-primary">Bienvenido. (Los datos en tiempo real se muestran si el prototipo esta ensendido, si no se muestra la última actualización).</p>
             </div>
 
             {/* Primera fila con 4 tarjetas */}
-            <div className="row gap-row">
-                <div className="col-md-3">
-                    <div className="card bg-outline-primary">
-                        <PhData />
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <div className="card bg-outline-success">
-                        <TurbidezData />
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <div className="card bg-outline-danger">
-                        <Temperature />
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <div className="card bg-outline-alert">
-                        <Humidity />
-                    </div>
-                </div>
+            <div className="d-flex col-md-12 gap-row"> 
+                <StatsCards />
             </div>
 
             {/* Segunda fila con 2 tarjetas */}
@@ -61,7 +43,7 @@ export const Home = () => {
                 </div>
                 <div className="col-md-8">
                     <div className="card h-100">
-  
+
                         <div className="chart-wrapper">
                             <PredictionChart />
                         </div>

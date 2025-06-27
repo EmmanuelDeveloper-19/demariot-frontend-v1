@@ -4,6 +4,7 @@ import { TurbityTable } from './turbityTable';
 import { TempTable } from './tempTable';
 import { HumidityTable } from './humidityTable';
 import { ColorimetryTable } from './colorimetryTable';
+import { TdsData } from '../../components/sensors/tdsData';
 
 export const Historial = () => {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -24,10 +25,7 @@ export const Historial = () => {
           Temperatura
         </button>
         <button onClick={() => setActiveTab('tab4')} className={activeTab === 'tab4' ? 'active' : ''}>
-          Humedad
-        </button>
-        <button onClick={() => setActiveTab('tab5')} className={activeTab === 'tab5' ? 'active' : ''}>
-          Colorimetría
+          Total de solidos disueltos (TDS)
         </button>
       </div>
 
@@ -49,12 +47,7 @@ export const Historial = () => {
         )}
         {activeTab === 'tab4' && (
           <div>
-            <HumidityTable/>
-          </div>
-        )}
-        {activeTab === 'tab5' && (
-          <div>
-            <ColorimetryTable/>
+            <TdsData/>
           </div>
         )}
       </div>
