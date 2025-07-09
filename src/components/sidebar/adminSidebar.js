@@ -39,7 +39,7 @@ export const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                             <li title="Ver predicciones">
                                 <Link to="predicciones">
                                     <i className="fas fa-area-chart" />
-                                    <p>Datos de los metales</p>
+                                    <p>Predicciones</p>
                                 </Link>
                             </li>
 

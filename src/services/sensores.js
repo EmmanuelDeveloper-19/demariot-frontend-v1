@@ -48,3 +48,12 @@ export const getColorimetrySensorData = async () => {
     }
 }
 
+export const getPredictionDataa = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/get-prediction`);
+        return {success: true, data:response.data};
+    }catch(error){
+
+    }
+}
+
