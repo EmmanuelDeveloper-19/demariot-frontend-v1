@@ -40,8 +40,8 @@ export const Login = () => {
             <div className="content-left">
 
                 <form className="form" onSubmit={handleLogin}>
-                    <h1 className="text-primary">Iniciar Sesión</h1>
 
+                    <h1 className="text-primary-dark mt-1">Iniciar Sesión</h1>
                     {error && <p className="alert alert-danger">{error}</p>}
                     {message && <p className="alert alert-success">{message}</p>}
                     <div className="form-group">

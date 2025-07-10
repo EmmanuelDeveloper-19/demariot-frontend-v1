@@ -21,6 +21,7 @@ import { ProtectedUserRoute } from "./services/protectedRoutes/ProtectedUserRout
 import { ProtectedAdminRoute } from "./services/protectedRoutes/ProtectedAdminRoute";
 import { Error404 } from "./pages/error/404";
 import { Prototype1 } from "./pages/proto/prototype";
+import { MetalPrediction } from "./pages/pediction/metalPredictions";
 import "./styles/global.css";
 import "./styles/global.responsive.css";
 
@@ -78,6 +79,7 @@ export function App() {
           <Route path="usuarioInfo/:id" element={<UserDetail />} />
           <Route path="log" element={<Logs />} />
           <Route path="prototype" element={<Prototype1/>}/>
+          <Route path="prediction" element={<MetalPrediction/>}/>
 
         </Route>
       </Routes>

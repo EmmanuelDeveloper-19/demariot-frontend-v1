@@ -38,8 +38,14 @@ export const AdminSidebar = ({ isOpen, toggleSidebar }) => {
 
                             <li title="Ver predicciones">
                                 <Link to="predicciones">
-                                    <i className="fas fa-area-chart" />
-                                    <p>Predicciones</p>
+                                    <i className="fas fa-eyedropper" />
+                                    <p>Metales</p>
+                                </Link>
+                            </li>
+                            <li title="Ver predicciones">
+                                <Link to="prediction">
+                                <i className="fas fa-area-chart"/>
+                                <p>Predicciones </p>
                                 </Link>
                             </li>
 
