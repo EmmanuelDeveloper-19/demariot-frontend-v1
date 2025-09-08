@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { getTurbidezSensorData } from "../../services/sensores";
 import { usePagination } from "../../hooks/usePagination";
-import { exportDataToExcel } from "../../utils/exportDataToExcel";
+import { getTdsData } from "../../services/sensores";
 
-export const TurbityTable = () => {
-    const [turbityData, setTurbityData] = useState([]);
+export const TdsTable = () => {
+
+    const [tdsData, setTdsData] = useState([]);
     const {
         currentData: paginatedUsers,
         currentPage,
@@ -12,16 +12,16 @@ export const TurbityTable = () => {
         next,
         prev,
         jump,
-    } = usePagination(turbityData, 5);
+    } = usePagination(tdsData, 5);
 
     useEffect(() => {
         const obtenerDatos = async () => {
             try {
-                const response = await getTurbidezSensorData();
+                const response = await getTdsData();
                 if (response.success) {
-                    setTurbityData(response.data.turbitySensor);
+                    setTdsData(response.data.tdsSensor);
                 } else {
-                    console.log("Error")
+                    return null;
                 }
             } catch (error) {
                 return null;
@@ -32,36 +32,28 @@ export const TurbityTable = () => {
 
     const handleExport = () => {
         const options = {
-            fileName: "Datos_Turbidez",
-            sheetName: "Sensor de Turbidez",
+            fileName: "Datos_TDS",
+            sheetName: "Sensor de TDS",
             fieldMappings: {
-                values: "Valores",
+                valor: "Valores",
                 timestamp: "Fecha de recopilación",
             }
-        };
-
-        exportDataToExcel(turbityData, options);
-    };
-
-    const getTurbityStatus = (estado) => {
-        switch (estado) {
-            case "Agua turbia":
-                return { label: "Agua turbia", className: "btn btn-danger" }; // rojo
-            case "Agua Clara":
-                return { label: "Agua Clara", className: "btn btn-primary" }; // azul celeste
-            default:
-                return { label: "Agua Normal", className: "btn btn-success" }; // verde
         }
-    };
+    }
 
+    const getTdsStatus = (valor) => {
+        if (valor < 300) return { label: "Buena", className: "btn bg-alert" }; // verde
+        if (valor <= 600) return { label: "Regular", className: "btn bg-alert" }; // amarillo
+        return { label: "Mala", className: "btn btn-danger" }; // rojo
+    };
 
 
     return (
         <>
             <div className="row d-flex justify-content-space-between">
                 <div className="col-md-9 w-100">
-                    <h2 className="text-subtitle text-primary">Información del ph</h2>
-                    <p className="text-body text-primary">Datos recopilados por el sensor de ph</p>
+                    <h2 className="text-subtitle text-primary">Información del sensor de TDS</h2>
+                    <p className="text-body text-primary">Datos recopilados por el sensor de tds</p>
                 </div>
                 <div className="col-md-3 d-flex gap w-100" style={{ display: "flex", justifyContent: "end", alignItems: "center" }}>
                     <button onClick={handleExport} className="btn btn-outline-primary m-10">
@@ -79,21 +71,21 @@ export const TurbityTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginatedUsers.map((turbityData, index) => {
-                            const status = getTurbityStatus(turbityData.estado);
+                        {paginatedUsers.map((tdsData, index) => {
+                            const status = getTdsStatus(tdsData.valor);
 
                             return (
-                                <tr key={turbityData._id}>
+                                <tr key={tdsData._id}>
                                     <td>{(currentPage - 1) * 5 + index + 1}</td>
-                                    <td>{turbityData.valor}</td>
-                                    <td>{turbityData.timestamp}</td>
+                                    <td>{tdsData.valor}</td>
+                                    <td>{tdsData.timestamp}</td>
                                     <td>
                                         <button className={status.className} disabled>
                                             {status.label}
                                         </button>
                                     </td>
                                 </tr>
-                            )
+                            );
                         })}
 
                     </tbody>
@@ -109,7 +101,7 @@ export const TurbityTable = () => {
                         <button
                             key={i}
                             onClick={() => jump(i + 1)}
-                            className={`btn w-100 ${currentPage === i + 1 ? 'btn-info m-10' : 'btn-outline-secondary m-10'}`}
+                            className={`btn ${currentPage === i + 1 ? 'btn-info m-10' : 'btn-outline-secondary m-10 w-100'}`}
                         >
                             {i + 1}
                         </button>

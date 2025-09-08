@@ -52,9 +52,30 @@ export const getPredictionData = async () => {
     try {
         const response = await axios.get(`${API_URL}/get-prediction`);
         return {success: true, data:response.data};
-        console.log("Datos", response.data);
     }catch(error){
 
     }
 }
 
+export const getTdsData = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/get-tds-sensor`);
+        return{
+            success: true, data:response.data
+        };
+    } catch(error){
+        return 0;
+    }
+}
+
+export const getConductivityData = async () => {
+    try{
+        const response = await axios.get(`${API_URL}/get-conductivity-value`);
+        return {
+            success: true,
+            data: response.data
+        }
+    } catch(error){
+        return null;
+    }
+}

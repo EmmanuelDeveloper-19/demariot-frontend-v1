@@ -110,8 +110,8 @@ export const UserCreate = () => {
                     <div className="column mt-1">
                         <div className="input-box">
                             <div className="row gap">
-                                <button className="btn btn-secondary" type="reset">Cancelar</button>
-                                <button className="btn btn-primary" type="submit">Guardar usuario</button>
+                                <button className="btn btn-secondary w-100" type="reset">Cancelar</button>
+                                <button className="btn btn-primary w-100" type="submit">Guardar usuario</button>
                             </div>
                         </div>
                         <div className="input-box">
@@ -136,7 +136,7 @@ export const UserCreate = () => {
                     message="Usuario agregado correctamente"
                     onConfirm={() => {
                         setShowSuccessModal(false);
-                        navigate("/dashboard/usuarios");
+                        navigate("/dashboard-admin/usuarios");
                     }}
                     onlyConfirm
                 />

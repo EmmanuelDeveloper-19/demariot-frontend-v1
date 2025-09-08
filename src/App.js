@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { Login } from "./auth/login";
-import { Home } from "./pages/home/home";
 import { ProfileInfo } from "./pages/settings/profile-info";
 import { UserList} from "./pages/users/UserList"
 import { UserCreate} from "./pages/users/UserCreate";
@@ -22,6 +21,10 @@ import { ProtectedAdminRoute } from "./services/protectedRoutes/ProtectedAdminRo
 import { Error404 } from "./pages/error/404";
 import { Prototype1 } from "./pages/proto/prototype";
 import { MetalPrediction } from "./pages/pediction/metalPredictions";
+import { MetalData } from "./pages/metalData";
+import { AboutInformation } from "./pages/aboutInformation";
+import { HomeIndex } from "./pages/home";
+
 import "./styles/global.css";
 import "./styles/global.responsive.css";
 
@@ -45,7 +48,7 @@ export function App() {
         >
           <Route path="" element={<Navigate to="home" replace />} />
           <Route path="*" element={<Error404 />} />
-          <Route path="home" element={<Home />} />
+          <Route path="home" element={<HomeIndex />} />
           <Route path="profile-info" element={<ProfileInfo />} />
           <Route path="mapa" element={<Mapa />} />
           <Route path="predicciones" element={<Prediction />} />
@@ -66,7 +69,7 @@ export function App() {
           }>
           <Route path="" element={<Navigate to="home" replace />} />
           <Route path="*" element={<Error404 />} />
-          <Route path="home" element={<Home />} />
+          <Route path="home" element={<HomeIndex />} />
           <Route path="profile-info" element={<ProfileInfo />} />
           <Route path="mapa" element={<Mapa />} />
           <Route path="predicciones" element={<Prediction />} />
@@ -79,8 +82,8 @@ export function App() {
           <Route path="usuarioInfo/:id" element={<UserDetail />} />
           <Route path="log" element={<Logs />} />
           <Route path="prototype" element={<Prototype1/>}/>
-          <Route path="prediction" element={<MetalPrediction/>}/>
-
+          <Route path="registro-metales" element={<MetalData/>}></Route>
+          <Route path="about-information" element={<AboutInformation/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

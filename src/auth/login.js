@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { roleRedirects } from "../utils/roleRedirects";
-import logo from "../assets/logoar.-02.png";
+import logo from "../assets/logo-compreso-v1.png";
 
 export const Login = () => {
     const { login } = useAuth();
@@ -36,7 +36,7 @@ export const Login = () => {
     };
 
     return (
-        <div className="login-content">
+  <div className="login-content">
             <div className="content-left">
 
                 <form className="form" onSubmit={handleLogin}>
@@ -79,7 +79,7 @@ export const Login = () => {
                         <Link className="link" to="/reset-password">¿Olvidaste tu contraseña?</Link>
                     </div>
                     <br />
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary ">
                         Iniciar sesión
                     </button>
                 </form>

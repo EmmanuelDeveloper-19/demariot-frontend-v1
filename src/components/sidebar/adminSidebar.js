@@ -32,20 +32,20 @@ export const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                             <li title="Ver mapa en tiempo real">
                                 <Link to="maps">
                                     <i className="fas fa-map"></i>
-                                    <p>Mapa de contaminación</p>
+                                    <p>Mapa (Próximamente)</p>
+                                </Link>
+                            </li>
+                            <li title="Predicciones de Metales pesados">
+                                <Link to="predicciones">
+                                    <i className="fa-solid fa-chart-line"></i>
+                                    <p>Proyecciones (Próximamente)</p>
                                 </Link>
                             </li>
 
-                            <li title="Ver predicciones">
-                                <Link to="predicciones">
-                                    <i className="fas fa-eyedropper" />
-                                    <p>Metales</p>
-                                </Link>
-                            </li>
-                            <li title="Ver predicciones">
-                                <Link to="prediction">
-                                <i className="fas fa-area-chart"/>
-                                <p>Predicciones </p>
+                            <li title="Información de Metales pesados registrados">
+                                <Link to="registro-metales">
+                                    <i className="fa-solid fa-atom"></i>
+                                    <p>Registro de metales</p>
                                 </Link>
                             </li>
 
@@ -69,12 +69,14 @@ export const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                                     <p>Historial de alertas</p>
                                 </Link>
                             </li>
-                            <li title="Ver logs ">
-                                <Link to="log">
-                                    <i className="fas fa-cogs" />
-                                    <p>Logs</p>
+
+                            <li title="Historial de alertas">
+                                <Link to="about-information">
+                                    <i className="fas fa-lightbulb" />
+                                    <p>Información relevante</p>
                                 </Link>
                             </li>
+
                         </ul>
                     </div>
                 </nav>

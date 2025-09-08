@@ -98,11 +98,11 @@ export const UserList = () => {
         <>
             <div className='container'>
                 <div className='row'>
-                    <div className='col-md-6 d-flex  align-items-center'>
+                    <div className='col-md-6 w-100'>
                         <h2 className='text-subtitle text-primary'>Gestión de Usuarios</h2>
                     </div>
 
-                    <div className='col-md-6 d-flex gap'>
+                    <div className='col-md-6 row w-100 justify-content-space-evenly'>
                         <label className='btn btn-outline-primary m-10'>
                             <i className='fas fa-upload' /> Importar excel
                             <input
@@ -186,7 +186,7 @@ export const UserList = () => {
                 </div>
                 <div className="row mt-10">
                     <div className='col-md-6 d-flex gap'>
-                        <button onClick={prev} disabled={currentPage === 1} className="btn btn-outline-secondary m-10">
+                        <button onClick={prev} disabled={currentPage === 1} className="btn btn-outline-secondary m-10 w-100 ">
                             &laquo; Anterior
                         </button>
 
@@ -194,13 +194,13 @@ export const UserList = () => {
                             <button
                                 key={i}
                                 onClick={() => jump(i + 1)}
-                                className={`btn ${currentPage === i + 1 ? 'btn-info m-10' : 'btn-outline-secondary m-10'}`}
+                                className={`btn ${currentPage === i + 1 ? 'btn-info m-10' : 'btn-outline-secondary m-10 w-100'}`}
                             >
                                 {i + 1}
                             </button>
                         ))}
 
-                        <button onClick={next} disabled={currentPage === maxPage} className="btn btn-outline-secondary m-10">
+                        <button onClick={next} disabled={currentPage === maxPage} className="btn btn-outline-secondary m-10 w-100">
                             Siguiente &raquo;
                         </button>
                     </div>

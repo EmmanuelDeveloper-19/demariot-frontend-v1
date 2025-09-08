@@ -51,6 +51,12 @@ p {
     background-color: var(--danger) !important;
 }
 
+.bg-primary-ligth {
+    background-color: var(--primary-light) !important;
+}
+
+
+
 .bg-outline-primary {
     background-color: var(--primary-bg-outline) !important;
     border: 1px solid var(--primary-border-outline);
@@ -234,6 +240,12 @@ p {
     color: var(--primary-dark);
 }
 
+a.url-link {
+    text-decoration: underline;
+    color: #0077cc;
+    cursor: pointer;
+}
+
 /* ==== LINKS STYLES FINAL ===== */
 
 /* ==== CONTAINERS START ===== */
@@ -242,7 +254,7 @@ p {
     border-radius: var(--radius-content);
     box-shadow: var(--shadow);
     padding: 20px;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     max-width: 100%;
 
 }
@@ -317,6 +329,7 @@ p {
 
 .row {
     display: flex;
+    flex-direction: row;
     width: 100%;
 }
 
@@ -324,8 +337,18 @@ p {
     flex-wrap: wrap;
 }
 
+.align-items-center {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
 .align-items-stretch {
     align-items: stretch;
+}
+
+.align-items-end {
+    align-items: end;
 }
 
 .justify-content-start {
@@ -335,6 +358,15 @@ p {
 .justify-content-end {
     justify-content: end;
 }
+
+.justify-content-space-evenly {
+    justify-content: space-between;
+}
+
+.justify-content-space-between {
+     justify-content: space-between;
+}
+
 
 .flex {
     display: flex;
@@ -363,6 +395,10 @@ p {
 .column {
     display: flex;
     column-gap: 10px;
+}
+
+.w-100 {
+    width: 100% !important;
 }
 
 /* ==== CONTAINERS FINAL ===== */
@@ -403,7 +439,7 @@ p {
 /*Buttons base*/
 .btn {
     height: 50px;
-    width: 100%;
+    width: auto;
     font-size: 16px;
     padding: 4px 12px;
     border: none;
@@ -457,7 +493,6 @@ p {
     justify-content: center;
     align-items: center;
 }
-
 /* Colors */
 .btn-primary {
     background: var(--primary-dark);
@@ -520,7 +555,7 @@ p {
 .btn-outline-secondary {
     background: transparent;
     border: 1px solid #ccc;
-    color: var(--text-color);
+    color: var(--text-primary);
 }
 
 .btn-outline-primary-light {
@@ -715,14 +750,12 @@ select {
     width: 100%;
     position: relative;
     border: 1px solid #d1d5db;
-    background-color: var(--bg-color);
     outline: none;
     font-size: 1rem;
     padding: 0 20px;
     border-radius: 4px;
-    /* más espaciado interno */
     appearance: none;
-    /* limpia el estilo nativo del navegador */
+    border-radius: var(--radius-element);
     background-repeat: no-repeat;
     background-position: right 1.2rem center;
     background-size: 12px;
@@ -825,6 +858,22 @@ select:focus {
 .card-icons .fa {
     color: white;
     font-size: 42px;
+}
+
+.rounded-icon {
+    background-color: #0077cc;
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.rounded-icon i {
+    color: white;
+    font-size: 1.5em;
 }
 
 
